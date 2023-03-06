@@ -2,6 +2,8 @@
 # define VECTOR_H
 #include <math.h>
 #include<mlx.h>
+#include <stdlib.h>
+#include<unistd.h>
 
 typedef struct s_vec
 {
@@ -19,6 +21,7 @@ t_vec	vec_mul(t_vec v1, t_vec v2);
 t_vec vec_muln(t_vec v1, double num);
 t_vec	vec_div(t_vec v1, t_vec v2);
 double vec_dot(t_vec v1, t_vec v2);
+t_vec vec_cross(t_vec v1, t_vec v2);
 double magnitude(t_vec v);
 t_vec norm(t_vec v1);
 #endif
