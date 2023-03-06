@@ -1,0 +1,20 @@
+[
+ {
+  "directory": "/Users/fael-bou/Desktop/projects/minirt",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-g",
+   "-I",
+   "inc",
+   "-I/usr/local/include",
+   "-c",
+   "src/render.c",
+   "-o",
+   "build/render.o"
+  ],
+  "file": "src/render.c"
+ }
+]
