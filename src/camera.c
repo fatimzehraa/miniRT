@@ -1,14 +1,18 @@
-//#include "minirt.h"
+#include "minirt.h"
 #include "camera.h"
 
-t_camera	camera(t_vec origin, t_vec forward, double fov)
+t_camera	camera(t_point origin, t_vec forward, double fov)
 {
 	t_camera	cam;
-	cam.origin = origin;
+	cam.o = origin;
 	cam.forward = forward;
-	cam.fov = fov;
+	cam.angle = fov;
+	cam.h = tan(fov / 2);
+	cam.w = cam.h * WIN_SIDE / WIN_SIDE;
 	return (cam);
 }
+
+
 
 int ft_map(int x, int from1, int to1, int from2, int to2)
 {
