@@ -12,16 +12,31 @@ typedef struct s_vec
 	double	z;
 }				t_vec;
 
+typedef	struct s_point{
+	double x;
+	double y;
+	double z;
+} t_point;
 
+typedef struct s_pixel{
+	int x;
+	int y;
+} t_pixel;
+
+typedef struct s_line{
+	double	a;
+	double	b; 
+} t_line;
 
 t_vec	vec(double x, double y, double z);
 t_vec	vec_add(t_vec v1, t_vec v2);
+t_vec	sub(t_point v1, t_point v2);
 t_vec	vec_sub(t_vec v1, t_vec v2);
 t_vec	vec_mul(t_vec v1, t_vec v2);
-t_vec vec_muln(t_vec v1, double num);
+t_vec	vec_muln(t_vec v1, double num);
 t_vec	vec_div(t_vec v1, t_vec v2);
-double vec_dot(t_vec v1, t_vec v2);
-t_vec vec_cross(t_vec v1, t_vec v2);
-double magnitude(t_vec v);
-t_vec norm(t_vec v1);
+double	vec_dot(t_vec v1, t_vec v2);
+t_vec	vec_cross(t_vec v1, t_vec v2);
+double	magnitude(t_vec v);
+t_vec	norm(t_vec v1);
 #endif

@@ -1,4 +1,6 @@
+#include "camera.h"
 #include "minirt.h"
+#include "vector.h"
 #include<mlx.h>
 #include<stdio.h>
 long rgb(unsigned char r, unsigned char g, unsigned char b){
@@ -7,27 +9,10 @@ long rgb(unsigned char r, unsigned char g, unsigned char b){
 	//printf("%d ", color);
 	return color;
 }
-int sqr(int x)
-{
-	return x * x;
-}
-
-typedef struct s_line{
-	double	a;
-	double	b; 
-} t_line;
-
-t_line	line(t_point p1, t_point p2)
-{
-	t_line line;
-	line.a = (p2.y - p1.y)/(p2.x - p1.x);
-	line.b = p1.y - line.a * p1.x;
-	return (line);
-}
 
 int distance(t_point p1, t_point p2)
 {
-	return (sqr(p2.x - p1.x) + sqr(p2.y - p1.y));
+	return (pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2));
 }
 
 int between(t_point p1, t_point p2, t_point p)
@@ -44,6 +29,14 @@ int between(t_point p1, t_point p2, t_point p)
 int equal(double a, double b)
 {
 	return fabs(a - b) <= 0.5;
+}
+
+t_line	line(t_point p1, t_point p2)
+{
+	t_line line;
+	line.a = (p2.y - p1.y)/(p2.x - p1.x);
+	line.b = p1.y - line.a * p1.x;
+	return (line);
 }
 
 void draw_line(t_line line, t_point p1, t_point p2, void *mlx, void *win)
@@ -69,8 +62,8 @@ void draw_line(t_line line, t_point p1, t_point p2, void *mlx, void *win)
 void draw_triangle(t_point p1, t_point p2, t_point p3, void *mlx, void *win)
 {
 	(void)p2;
-//	draw_line(line(p1, p2), p1, p2, mlx, win);
-//	draw_line(line(p2, p3), p2, p3, mlx, win);
+	draw_line(line(p1, p2), p1, p2, mlx, win);
+	draw_line(line(p2, p3), p2, p3, mlx, win);
 	draw_line(line(p3, p1), p3, p1, mlx, win);
 }
 
@@ -82,7 +75,7 @@ void circle(t_point center, int r, void *mlx, void *win){
 	while (y < WIN_SIDE) {
 		x = 0;
 		while (x < WIN_SIDE) {
-			if (sqr(x - center.x) + sqr(y - center.y) > sqr(r))
+			if (pow(x - center.x, 2) + pow(y - center.y, 2) > pow(r, 2))
 				//mlx_pixel_put(mlx, win, x, y, rgb((x)*255/WIN_SIDE,  (WIN_SIDE - y) * 255/WIN_SIDE, 0));
 				mlx_pixel_put(mlx, win, x, y, 0xFFFFFF);
 			x++;
@@ -108,28 +101,19 @@ void render(void *mlx, void *win)
 
 }
 
-int main(void)
+void sphere(t_point center, int r, t_camera cam, void *mlx, void *win)
 {
-	void *win;
-	void *mlx;
-	 t_point center;
+	int x;
+	int y;
 
-	center.x = (double)WIN_SIDE/2;
-	center.y = (double)WIN_SIDE/2; 
-	t_point p1;
-	t_point p2;
-	p1.x = 0;
-	p1.y = 0;
-	p2.x = 600;
-	p2.y = 400;
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, WIN_SIDE, WIN_SIDE, "miniRT");
-//	draw_triangle(center, p1, p2, mlx, win);
-	draw_line(line(p2, center), p2, center, mlx, win);
-//	draw_line(line((t_point){WIN_SIDE, 0, 0}, (t_point){0, WIN_SIDE, 0}), mlx, win);
-	//circle(center, 50, mlx, win);
-	//render(mlx, win);
-	mlx_loop(mlx);
-
-	return (0);
+	y = 0;
+	while (y < WIN_SIDE) {
+		x = 0;
+		while (x < WIN_SIDE) {
+			if (pow(x - center.x, 2) + pow(y - center.y, 2) < pow(r, 2))
+				send_ray(cam, x, y, mlx, win);
+			x++;
+		}
+		y++;
+	}
 }
