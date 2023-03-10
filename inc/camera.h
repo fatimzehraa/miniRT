@@ -25,5 +25,7 @@ t_point	pixel_to_point(t_camera cam, int x, int y);
 t_pixel point_to_pixel(t_camera cam, t_point p);
 void send_ray(t_camera cam, int x, int y, void *mlx, void *win);
 void draw(t_camera cam, void *mlx, void *win);
-void sphere(t_point center, int r, t_camera cam, void *mlx, void *win);
+void sphere(t_sphere s, t_camera cam, void *mlx, void *win);
+int intersect(t_ray r, t_sphere s, t_camera cam, int x, int y, void *mlx, void *win);
+//int intersect(double a, double b, double c, int x, int y);
 #endif

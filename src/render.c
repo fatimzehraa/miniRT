@@ -101,17 +101,28 @@ void render(void *mlx, void *win)
 
 }
 
-void sphere(t_point center, int r, t_camera cam, void *mlx, void *win)
+void sphere(t_sphere s, t_camera cam, void *mlx, void *win)
 {
 	int x;
 	int y;
+	t_ray r;
+	t_point p;
 
 	y = 0;
 	while (y < WIN_SIDE) {
 		x = 0;
 		while (x < WIN_SIDE) {
+			p.x = ft_map(x, 0, WIN_SIDE, -cam.w, cam.w);
+			p.y = ft_map(y, 0, WIN_SIDE, cam.h, -cam.h);
+			r = ray(cam, p);
+			if (!intersect(r, s, cam, x, y, mlx, win))
+				mlx_pixel_put(mlx, win, x, y, 0x000000);
+			//send_ray(cam, x, y, mlx, win);
+			/* if intersect(a, b, c, x, y))
+				
+				mlx_pixel_put(mlx, win, x, y, 0xFFFFFF);
 			if (pow(x - center.x, 2) + pow(y - center.y, 2) < pow(r, 2))
-				send_ray(cam, x, y, mlx, win);
+				send_ray(cam, x, y, s, mlx, win); */
 			x++;
 		}
 		y++;

@@ -2,6 +2,7 @@
 #include "vector.h"
 #include <mlx.h>
 #include "camera.h"
+#include <math.h>
 
 int main(void)
 {
@@ -14,11 +15,11 @@ int main(void)
 	o.x = 0;
 	o.y = 0;
 	o.z = -1;
-	forward.x = 0;
-	forward.y = 0;
+	forward.x = 500;
+	forward.y = 500;
 	forward.z = 1;
 
-	cam = camera(o, forward, 90);
+	cam = camera(o, forward, M_PI/2);
 	center.x = (double)WIN_SIDE/2;
 	center.y = (double)WIN_SIDE/2; 
 	t_point p1;
@@ -29,8 +30,10 @@ int main(void)
 	p2.y = 400;
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, WIN_SIDE, WIN_SIDE, "miniRT");
-	sphere(center, 50, cam, mlx, win);
-	sphere(o, 150, cam, mlx, win);
+	t_sphere s;
+	s.o = (t_point){50, 50, 1};
+	s.r = 1;
+	sphere(s, cam, mlx, win);
 //	draw(cam, mlx, win);
 //	draw_triangle(center, p1, p2, mlx, win);
 //	draw_line(line(p2, center), p2, center, mlx, win);

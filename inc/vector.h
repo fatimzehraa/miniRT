@@ -12,11 +12,12 @@ typedef struct s_vec
 	double	z;
 }				t_vec;
 
-typedef	struct s_point{
+typedef t_vec t_point;
+/* struct s_point{
 	double x;
 	double y;
 	double z;
-} t_point;
+} t_point; */
 
 typedef struct s_pixel{
 	int x;
@@ -27,6 +28,11 @@ typedef struct s_line{
 	double	a;
 	double	b; 
 } t_line;
+
+typedef struct s_sphere{
+	t_point o;
+	double r;
+} t_sphere;
 
 t_vec	vec(double x, double y, double z);
 t_vec	vec_add(t_vec v1, t_vec v2);
