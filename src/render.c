@@ -6,7 +6,6 @@
 long rgb(unsigned char r, unsigned char g, unsigned char b){
 	long color;
 	color = 0 | ( r << 16 | g << 8 | b);
-	//printf("%d ", color);
 	return color;
 }
 
@@ -107,7 +106,8 @@ void sphere(t_sphere s, t_camera cam, void *mlx, void *win)
 	int y;
 	t_ray r;
 	t_point p;
-
+	t_equation e;
+// 
 	y = 0;
 	while (y < WIN_SIDE) {
 		x = 0;
@@ -115,14 +115,11 @@ void sphere(t_sphere s, t_camera cam, void *mlx, void *win)
 			p.x = ft_map(x, 0, WIN_SIDE, -cam.w, cam.w);
 			p.y = ft_map(y, 0, WIN_SIDE, cam.h, -cam.h);
 			r = ray(cam, p);
-			if (!intersect(r, s, cam, x, y, mlx, win))
-				mlx_pixel_put(mlx, win, x, y, 0x000000);
-			//send_ray(cam, x, y, mlx, win);
-			/* if intersect(a, b, c, x, y))
-				
-				mlx_pixel_put(mlx, win, x, y, 0xFFFFFF);
-			if (pow(x - center.x, 2) + pow(y - center.y, 2) < pow(r, 2))
-				send_ray(cam, x, y, s, mlx, win); */
+			e = intersection(r, s);
+			if (e.delta < 0)
+;//				mlx_pixel_put(mlx, win, x, y, 0x000000);
+			else
+		 		mlx_pixel_put(mlx, win, x, y, rgb(ft_map(r.dir.x, cam.h, -cam.h, 0, 1)*255, 0, ft_map(r.dir.y, -cam.h, cam.h, 0, 1) * 255));
 			x++;
 		}
 		y++;

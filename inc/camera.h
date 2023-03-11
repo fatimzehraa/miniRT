@@ -18,6 +18,17 @@ typedef struct	s_ray
 	t_vec	dir;
 }				t_ray;
 
+typedef struct s_equation
+{
+	double a;
+	double b;
+	double c;
+	double delta;
+	double t1;
+	double t2;
+	double t;
+} t_equation;
+
 t_camera	camera(t_point origin, t_vec forward, double fov);
 t_ray	ray(t_camera cam, t_point p);
 double ft_map(double x, double from1, double to1, double from2, double to2);
@@ -26,6 +37,7 @@ t_pixel point_to_pixel(t_camera cam, t_point p);
 void send_ray(t_camera cam, int x, int y, void *mlx, void *win);
 void draw(t_camera cam, void *mlx, void *win);
 void sphere(t_sphere s, t_camera cam, void *mlx, void *win);
-int intersect(t_ray r, t_sphere s, t_camera cam, int x, int y, void *mlx, void *win);
+t_equation intersection(t_ray r, t_sphere s);
+//int intersect(t_ray r, t_sphere s, t_camera cam, int x, int y, void *mlx, void *win);
 //int intersect(double a, double b, double c, int x, int y);
 #endif

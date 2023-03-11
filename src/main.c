@@ -4,6 +4,12 @@
 #include "camera.h"
 #include <math.h>
 
+typedef struct s_list
+{
+	void *shape;
+	struct s_list *next;
+} t_list;
+
 int main(void)
 {
 	void *win;
@@ -31,15 +37,13 @@ int main(void)
 	mlx = mlx_init();
 	win = mlx_new_window(mlx, WIN_SIDE, WIN_SIDE, "miniRT");
 	t_sphere s;
-	s.o = (t_point){50, 50, 1};
+	s.o = (t_point){0.5, 0.50, 1};
 	s.r = 1;
+	t_sphere s1;
+	s1.o = (t_point){-1, 1, 0};
+	s1.r = 0.5;
+	sphere(s1, cam, mlx, win);
 	sphere(s, cam, mlx, win);
-//	draw(cam, mlx, win);
-//	draw_triangle(center, p1, p2, mlx, win);
-//	draw_line(line(p2, center), p2, center, mlx, win);
-//	draw_line(line((t_point){WIN_SIDE, 0, 0}, (t_point){0, WIN_SIDE, 0}), mlx, win);
-	//circle(center, 50, mlx, win);
-	//render(mlx, win);
 	mlx_loop(mlx);
 
 	return (0);
