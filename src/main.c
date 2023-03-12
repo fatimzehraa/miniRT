@@ -4,13 +4,7 @@
 #include "camera.h"
 #include <math.h>
 
-typedef struct s_list
-{
-	void *shape;
-	struct s_list *next;
-} t_list;
-
-int main(void)
+/* int main(void)
 {
 	void *win;
 	void *mlx;
@@ -35,7 +29,7 @@ int main(void)
 	p2.x = 600;
 	p2.y = 400;
 	mlx = mlx_init();
-	win = mlx_new_window(mlx, WIN_SIDE, WIN_SIDE, "miniRT");
+	win = mlx_new_window(mlx, WIN_SIDE, WIN_SIDE, "minirt");
 	t_sphere s;
 	s.o = (t_point){0.5, 0.50, 1};
 	s.r = 1;
@@ -47,4 +41,56 @@ int main(void)
 	mlx_loop(mlx);
 
 	return (0);
+} */
+
+#include "minirt.h"
+#include "shape.h"
+
+void render_(void *mlx, void *win, t_shape *s, t_camera cam)
+{
+	int x;
+	int y;
+	t_ray r;
+	t_point p;
+	t_equation e;
+
+	y = 0;
+	while (y < WIN_SIDE)
+	{
+		x = 0;
+		while (x < WIN_SIDE)
+		{
+			p.x = ft_map(x, 0, WIN_SIDE, -cam.w, cam.w);
+			p.y = ft_map(y, 0, WIN_SIDE, cam.h, -cam.h);
+			r = ray(cam, p);
+			e = s->intersection(r, s);
+			if (e.delta > 0)
+		 		mlx_pixel_put(mlx, win, x, y, rgb(ft_map(r.dir.x, cam.h, -cam.h, 0, 1)*255, 0, ft_map(r.dir.y, -cam.h, cam.h, 0, 1) * 255));
+			x++;
+		}
+		y++;
+	}
+}
+
+#include <stdio.h>
+int main()
+{
+	void *win;
+	void *mlx;
+	t_shape *s;
+	t_camera cam;
+
+	mlx = mlx_init();
+	win = mlx_new_window(mlx, WIN_SIDE, WIN_SIDE, "minirt");
+
+	cam = camera((t_point){0,0,-1}, (t_vec){0,0,1}, M_PI/2);
+	t_point p;
+	p.x = 0;
+	p.y = 0;
+	p.z = 0;
+	s = new_sphere(p, 0.4);
+	render_(mlx, win, s, cam);
+	mlx_loop(mlx);
+	
+	return EXIT_SUCCESS;
 }
