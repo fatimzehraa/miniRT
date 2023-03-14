@@ -13,11 +13,6 @@ typedef struct s_vec
 }				t_vec;
 
 typedef t_vec t_point;
-/* struct s_point{
-	double x;
-	double y;
-	double z;
-} t_point; */
 
 typedef struct s_pixel{
 	int x;
