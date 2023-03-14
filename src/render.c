@@ -17,8 +17,9 @@ t_vec put_color(t_ray r, t_shape *s)
 		e = s->intersection(r, s);
 		if (e.delta > 0)
 		{
+			//TODO: if(!is_shadow) give color to pixel
 			if (e_min.t > e.t)
-					e_min = e;
+				e_min = e;
 		}
 		s = s->next;
 	}
