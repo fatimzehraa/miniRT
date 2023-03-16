@@ -1,4 +1,5 @@
 #include "camera.h"
+#include "light.h"
 #include "shape.h"
 #include "minirt.h"
 #include "vector.h"
@@ -6,10 +7,13 @@
 #include<stdio.h>
 #include <math.h>
 
-t_vec put_color(t_ray r, t_shape *s)
+t_vec put_color(t_ray r, t_ctx ctx)
 {
 	t_equation e;
 	t_equation e_min;
+	t_ray r_light;
+	t_shape *s = ctx.s;
+	t_point p_shape;
 
 	e_min.t = INFINITY;
 	while (s)
@@ -17,8 +21,10 @@ t_vec put_color(t_ray r, t_shape *s)
 		e = s->intersection(r, s);
 		if (e.delta > 0)
 		{
-			//TODO: if(!is_shadow) give color to pixel
-			if (e_min.t > e.t)
+			p_shape = vec_add(vec_muln(r.dir, e.t), r.o);
+			r_light = ray(p_shape, ctx.lights->o);
+			(void)r_light;
+			if (e.t > 0 && e_min.t > e.t && intersect_light(r_light, ctx.s))
 				e_min = e;
 		}
 		s = s->next;
@@ -28,7 +34,7 @@ t_vec put_color(t_ray r, t_shape *s)
 	return (e_min.shape->color);
 }
 
-void render_(void *mlx, void *win, t_shape *s, t_camera cam)
+void render_(t_ctx ctx)
 {
 	int x;
 	int y;
@@ -42,11 +48,11 @@ void render_(void *mlx, void *win, t_shape *s, t_camera cam)
 		x = 0;
 		while (x < WIN_SIDE)
 		{
-			p.x = ft_map(x, 0, WIN_SIDE, -cam.w, cam.w);
-			p.y = ft_map(y, 0, WIN_SIDE, cam.h, -cam.h);
-			r = ray(cam, p);
-			color = put_color(r, s);
-			mlx_pixel_put(mlx, win, x, y, rgb(color.x, color.y, color.z));
+			p.x = ft_map(x, 0, WIN_SIDE, -ctx.cam.w, ctx.cam.w);
+			p.y = ft_map(y, 0, WIN_SIDE, ctx.cam.h, -ctx.cam.h);
+			r = ray(ctx.cam.o, p);
+			color = put_color(r, ctx);
+			mlx_pixel_put(ctx.mlx, ctx.win, x, y, rgb(color.x, color.y, color.z));
 			x++;
 		}
 		y++;

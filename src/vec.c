@@ -1,4 +1,3 @@
-#include "minirt.h"
 #include "vector.h"
 
 t_vec	vec(double x, double y, double z)

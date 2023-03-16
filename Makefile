@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -Wunused -g #-fsanitize=address
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	LDFLAGS = -lmlx -lXext -lX11 -lm -lbsd
@@ -13,7 +13,7 @@ BUILD_DIR = build
 #HEADER_FILES = 
 INCLUDES = $(addprefix inc/, $(HEADER_FILES))
 INC = -I inc -I/usr/local/include
-FILES = main.o render.o camera.o vec.o vec_multipliying.o shapes/sphere.o shapes/plane.o shapes/cylinder.o shapes/lists.o utils.o 
+FILES = main.o render.o camera.o vec.o vec_multipliying.o shapes/sphere.o shapes/plane.o shapes/cylinder.o shapes/lists.o utils.o light.o
 OBG = $(addprefix $(BUILD_DIR)/, $(FILES))
 
 NAME = miniRT

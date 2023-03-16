@@ -1,7 +1,6 @@
 #ifndef CAMERA_H
 # define CAMERA_H
 
-#include "minirt.h"
 # include "vector.h"
 
 typedef struct s_shape t_shape;
@@ -35,7 +34,7 @@ typedef struct s_equation
 
 t_point		get_point(t_ray r, double t);
 t_camera	camera(t_point origin, t_vec forward, double fov);
-t_ray		ray(t_camera cam, t_point p);
+t_ray		ray(t_point o, t_point p);
 double		ft_map(double x, double from1, double to1, double from2, double to2);
 t_point		pixel_to_point(t_camera cam, int x, int y);
 t_pixel 	point_to_pixel(t_camera cam, t_point p);

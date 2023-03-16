@@ -15,12 +15,12 @@ t_camera	camera(t_point origin, t_vec forward, double fov)
 	return (cam);
 }
 
-t_ray	ray(t_camera cam, t_point p)
+t_ray	ray(t_point o, t_point p)
 {
 	t_ray	ray;
-	ray.o = cam.o;
-	ray.dir = (sub(p, cam.o));
-	ray.dir.z = 1;
+	ray.o = o;
+	ray.dir = (sub(p, o));
+//	ray.dir.z = 1;
 	ray.dir = norm(ray.dir);
 	return (ray);
 }
