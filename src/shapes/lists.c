@@ -23,6 +23,14 @@ t_shape *lst_new()
 	lst = malloc(sizeof(t_shape));
 	if (lst == NULL)
 		return (NULL);
+	lst->forward = (t_vec){0, 0, 0};
+	lst->origin = (t_vec){0, 0, 0};
+	lst->color = (t_vec){1, 1, 1};
+	lst->r = 0;
+	lst->height = 0;
+	lst->d3 = 0;
+	lst->intersection = NULL;
+	lst->normal_at = NULL;
 	lst->next = NULL;
 	return (lst);
 }
