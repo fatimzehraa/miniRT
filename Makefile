@@ -13,7 +13,8 @@ BUILD_DIR = build
 #HEADER_FILES = 
 INCLUDES = $(addprefix inc/, $(HEADER_FILES))
 INC = -I inc -I/usr/local/include
-FILES = main.o render.o camera.o vec.o vec_multipliying.o shapes/sphere.o shapes/plane.o shapes/cylinder.o shapes/lists.o utils.o light.o
+FILES = main.o render.o camera.o vec.o vec_multipliying.o shapes/sphere.o shapes/plane.o shapes/cylinder.o shapes/lists.o utils.o light.o\
+		parse/parse.o parse/str.o parse/utils.o parse/gnl/get_next_line.o parse/gnl/get_next_line_utils.o debug.o
 OBG = $(addprefix $(BUILD_DIR)/, $(FILES))
 
 NAME = miniRT
