@@ -50,6 +50,7 @@ void render_(t_ctx ctx)
 		{
 			p.x = ft_map(x, 0, WIN_SIDE, -ctx.cam.w, ctx.cam.w);
 			p.y = ft_map(y, 0, WIN_SIDE, ctx.cam.h, -ctx.cam.h);
+			p.z = 0; // Added
 			r = ray(ctx.cam.o, p);
 			color = put_color(r, ctx);
 			mlx_pixel_put(ctx.mlx, ctx.win, x, y, rgb(color.x, color.y, color.z));
