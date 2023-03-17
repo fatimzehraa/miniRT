@@ -23,4 +23,9 @@ long rgb(double r, double g, double b);
 int equal(double a, double b);
 void render_(t_ctx ctx);
 
+
+// todo: delete
+void print_shape(t_shape *shape);
+void print_vec(t_vec *vec);
+
 #endif
