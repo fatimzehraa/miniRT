@@ -14,7 +14,7 @@ typedef struct s_ctx
 	void	*mlx;
 	void	*win;
 	t_shape	*s;
-	t_camera cam;
+	t_camera *cam;
 	t_light	*lights;
 }	t_ctx;
 
@@ -27,5 +27,6 @@ void render_(t_ctx ctx);
 // todo: delete
 void print_shape(t_shape *shape);
 void print_vec(t_vec *vec);
+void print_ctx(t_ctx ctx);
 
 #endif

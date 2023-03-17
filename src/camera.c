@@ -20,7 +20,6 @@ t_ray	ray(t_point o, t_point p)
 	t_ray	ray;
 	ray.o = o;
 	ray.dir = (sub(p, o));
-//	ray.dir.z = 1;
 	ray.dir = norm(ray.dir);
 	return (ray);
 }

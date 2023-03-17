@@ -9,6 +9,7 @@ typedef struct	s_light
 	t_point		o;
 	t_vec		dir;
 	t_vec		color;
+	double		ratio;
 }				t_light;
 
 t_light	*new_light(t_point origine, t_vec color);

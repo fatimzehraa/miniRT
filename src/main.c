@@ -15,20 +15,16 @@ int main(int ac, char **av)
 		return EXIT_FAILURE;
 
 	ctx.s = NULL;
+	ctx.lights = NULL;
+	ctx.cam = NULL;
 
-	ctx.cam = camera((t_point){0,0,-1}, (t_vec){0,0,1}, M_PI/4);
-	ctx.lights = new_light((t_point){0,5,3}, (t_vec){1,1,1});
-
-	ctx.s = parse(av[1]);
-	if (ctx.s == NULL)
+	if (!parse(av[1], &ctx))
 		return EXIT_FAILURE;
+	//*ctx.cam = camera((t_point){0,0,-1}, (t_vec){0,0,1}, M_PI/4);
+	//ctx.lights = new_light((t_point){0,5,3}, (t_vec){1,1,1});
+	// debug_ctx(ctx);
+	print_ctx(ctx);
 
-	t_shape *s = ctx.s;
-	while (s != NULL)
-	{
-		print_shape(s);
-		s = s->next;
-	}
 	ctx.mlx = mlx_init();
 	ctx.win = mlx_new_window(ctx.mlx, WIN_SIDE, WIN_SIDE, "minirt");
 	render_(ctx);
