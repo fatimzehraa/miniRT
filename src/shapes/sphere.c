@@ -1,6 +1,6 @@
 #include "shape.h"
 #include "stdio.h"
-t_equation intersection_(t_ray r, t_shape *s)
+t_equation sphere_intersection(t_ray r, t_shape *s)
 {
 	t_equation eq;
 	r.o.z = -2;
@@ -41,7 +41,7 @@ t_shape *new_sphere(t_point origin, double r)
 	s = lst_new();
 	s->origin = origin;
 	s->r = r;
-	s->intersection = intersection_;
+	s->intersection = sphere_intersection;
 	s->normal_at = normal_at;
 
 	return s;
