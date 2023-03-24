@@ -19,7 +19,7 @@ t_vec put_color(t_ray r, t_ctx ctx)
 	while (s)
 	{
 		e = s->intersection(r, s);
-		if (e.delta > 0)
+		if (e.delta >= 0)
 		{
 			p_shape = vec_add(vec_muln(r.dir, e.t), r.o);
 			r_light = ray(p_shape, ctx.lights->o);

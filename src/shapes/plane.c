@@ -1,4 +1,6 @@
+#include "minirt.h"
 #include "shape.h"
+#include "vector.h"
 #include <math.h>
 
 #include <stdio.h>
@@ -7,6 +9,7 @@ t_equation plane_intersection(t_ray r, t_shape *s)
 	t_equation e;
 	double t;
 
+	e.shape = s;
 	double r1 = vec_dot(r.o, s->forward);
 	double r2 = vec_dot(r.dir, s->forward);
 	double r3 = vec_dot(s->origin, s->forward);
@@ -22,10 +25,7 @@ t_equation plane_intersection(t_ray r, t_shape *s)
 		e.delta = -1;
 		return (e);
 	}
-//	t = (vec_dot(s->origin, s->forward) - vec_dot(r.o, s->forward)) / vec_dot(r.dir, s->forward);
-	//t =  r1 / r2;
 	e.delta = -1;
-	e.shape = s;
 	return (e);
 }
 
