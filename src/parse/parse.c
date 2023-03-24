@@ -5,6 +5,7 @@
 #include "parse.h"
 #include "minirt.h"
 #include "get_next_line.h"
+#include "vector.h"
 
 
 static int parse_sphere(char **line, t_shape *shape)
@@ -31,6 +32,7 @@ static int parse_cy(char **line, t_shape *shape)
 	if (!parse_vec(line, &shape->forward) || !skip(line))
 		return (0);
 
+	shape->forward = norm(shape->forward);
 	if (!parse_float(line, &shape->r) || !skip(line))
 		return (0);
 
