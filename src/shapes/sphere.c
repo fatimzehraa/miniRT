@@ -1,6 +1,7 @@
 #include "minirt.h"
 #include "shape.h"
 #include "stdio.h"
+#include "vector.h"
 t_equation sphere_intersection(t_ray r, t_shape *s)
 {
 	t_equation eq;
@@ -16,7 +17,11 @@ t_equation sphere_intersection(t_ray r, t_shape *s)
 	eq.t1 = (-eq.b + sqrt(eq.delta)) / (2 * eq.a);
 	eq.t2 = (-eq.b - sqrt(eq.delta)) / (2 * eq.a);
 	if (eq.t1 < EPSILON && eq.t2 < EPSILON)
+	{
+		printf("t1 = %f, t2 = %f\n", eq.t1, eq.t2);
+		eq.delta = -1;
 		return (eq);
+	}
 	if (eq.t1 > EPSILON && eq.t1 < eq.t2)
 		eq.t = eq.t1;
 	else
@@ -25,13 +30,12 @@ t_equation sphere_intersection(t_ray r, t_shape *s)
 }
 
 // not used yet
-t_vec normal_at(t_point p, t_sphere s)
+t_vec sp_normal_at(t_point p, t_shape *s)
 {
-	(void)(p);
-	(void)(s);
-	t_vec n;
-	n = (t_vec) {0, 0, 0};
-	return (n);
+	t_sphere *sp;
+
+	sp = (t_sphere *) s;
+	return (norm(sub(p, sp->o)));
 }
 
 t_shape *new_sphere(t_point origin, double r)
@@ -42,7 +46,7 @@ t_shape *new_sphere(t_point origin, double r)
 	s->origin = origin;
 	s->r = r;
 	s->intersection = sphere_intersection;
-	s->normal_at = normal_at;
+	s->normal_at = sp_normal_at;
 
 	return s;
 }

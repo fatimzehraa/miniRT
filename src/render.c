@@ -11,27 +11,28 @@ t_vec put_color(t_ray r, t_ctx ctx)
 {
 	t_equation e;
 	t_equation e_min;
-	t_ray r_light;
 	t_shape *s = ctx.s;
-	t_point p_shape;
 
 	e_min.t = INFINITY;
+	e_min.shape = NULL;
 	while (s)
 	{
 		e = s->intersection(r, s);
 		if (e.delta >= 0)
 		{
-			p_shape = vec_add(vec_muln(r.dir, e.t), r.o);
-			r_light = ray(p_shape, ctx.lights->o);
-			(void)r_light;
-			if (e.t > 0 && e_min.t > e.t && intersect_light(r_light, ctx.s))
+			e.p_shape = vec_add(vec_muln(r.dir, e.t), r.o);
+			e.r_light = ray(ctx.lights->o, e.p_shape);
+			if (e.t > 0 )//&& e_min.t >= e.t && intersect_light(e.r_light, ctx.s))
 				e_min = e;
 		}
 		s = s->next;
 	}
 	if (e_min.t == INFINITY)
 		return ((t_vec){0,0,0});
-	return (e_min.shape->color);
+    double cos = -vec_dot(e_min.r_light.dir, e_min.shape->normal_at(e.p_shape, e_min.shape) );
+	if (cos < 0)
+		return ((t_vec){0,0,0});
+	return (vec_muln(e_min.shape->color, cos));
 }
 
 void render_(t_ctx ctx)

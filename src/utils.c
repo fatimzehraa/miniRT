@@ -8,7 +8,13 @@ int equal(double a, double b)
 
 long rgb(double r, double g, double b){
 	long color;
-	color = 0 | ( (unsigned char)(r * 255) << 16 | (unsigned char)(g * 255) << 8 | (unsigned char)(b * 255));
+	if (r > 1 || r < 0)
+		r = r > 1;
+	if (g > 1 || g < 0)
+		g = g > 1;
+	if (b > 1 || b < 0)
+		b = b > 1;
+	color = 0 | ( ((unsigned char)(r * 255)) << 16 | ((unsigned char)(g * 255)) << 8 | (unsigned char)(b * 255));
 	return color;
 }
 

@@ -29,6 +29,8 @@ typedef struct s_equation
 	double t1;
 	double t2;
 	double t;
+	t_vec p_shape;
+	t_ray r_light;
 	t_shape *shape;
 } t_equation;
 

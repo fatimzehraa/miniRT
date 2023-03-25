@@ -29,6 +29,12 @@ t_equation plane_intersection(t_ray r, t_shape *s)
 	return (e);
 }
 
+t_vec pl_normal_at(t_point p, t_shape *s)
+{
+	(void)(p);
+	return (s->forward);
+}
+
 t_shape *new_plane(t_point p, t_vec v)
 {
 	t_shape *s;

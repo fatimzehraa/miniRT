@@ -18,7 +18,7 @@ static int parse_sphere(char **line, t_shape *shape)
 
 	if (!parse_color(line, &shape->color))
 		return (0);
-
+	shape->normal_at = sp_normal_at;
 	shape->intersection = sphere_intersection;
 
 	return (1);
@@ -57,6 +57,7 @@ static int parse_plane(char **line, t_shape *shape)
 	if (!parse_color(line, &shape->color))
 		return (0);
 
+	shape->normal_at = pl_normal_at;
 	shape->intersection = plane_intersection;
 	return (1);
 }
