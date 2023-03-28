@@ -36,6 +36,14 @@ void print_cam(t_camera *cam)
 	printf("\nforward:");
 	print_vec(&cam->forward);
 
+	printf("\nup:");
+	print_vec(&cam->up);
+
+	printf("\nright:");
+	print_vec(&cam->right);
+
+	printf("\nwidth: %f, height: %f", cam->w, cam->h);
+
 	printf("\nfov: %f\n", cam->angle);
 	printf("\n");
 }

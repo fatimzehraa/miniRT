@@ -22,17 +22,14 @@ t_vec put_color(t_ray r, t_ctx ctx)
 		{
 			e.p_shape = vec_add(vec_muln(r.dir, e.t), r.o);
 			e.r_light = ray(ctx.lights->o, e.p_shape);
-			if (e.t > 0 )//&& e_min.t >= e.t && intersect_light(e.r_light, ctx.s))
+			if (e.t > 0 && e_min.t >= e.t)// && intersect_light(e.r_light, ctx.s))
 				e_min = e;
 		}
 		s = s->next;
 	}
 	if (e_min.t == INFINITY)
 		return ((t_vec){0,0,0});
-    double cos = -vec_dot(e_min.r_light.dir, e_min.shape->normal_at(e.p_shape, e_min.shape) );
-	if (cos < 0)
-		return ((t_vec){0,0,0});
-	return (vec_muln(e_min.shape->color, cos));
+	return (e_min.shape->color);
 }
 
 void render_(t_ctx ctx)
@@ -49,9 +46,11 @@ void render_(t_ctx ctx)
 		x = 0;
 		while (x < WIN_SIDE)
 		{
-			p.x = ft_map(x, 0, WIN_SIDE, -ctx.cam->w, ctx.cam->w);
-			p.y = ft_map(y, 0, WIN_SIDE, ctx.cam->h, -ctx.cam->h);
-			p.z = 0; // Added
+			p.x = ft_map(x, 0, WIN_SIDE, ctx.cam->w, -ctx.cam->w);
+			p.y = ft_map(y, 0, WIN_SIDE, -ctx.cam->h, ctx.cam->h);
+			r.o = ctx.cam->o;
+			r.dir = vec_add(ctx.cam->forward, vec_add(vec_muln(ctx.cam->up, p.x), vec_muln(ctx.cam->right, p.y)));
+			r.dir = norm(r.dir);
 			r = ray(ctx.cam->o, p);
 			color = put_color(r, ctx);
 			mlx_pixel_put(ctx.mlx, ctx.win, x, y, rgb(color.x, color.y, color.z));

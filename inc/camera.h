@@ -9,6 +9,8 @@ typedef struct	s_camera
 {
 	t_point	o;
 	t_vec	forward;
+	t_vec	right;
+	t_vec	up;
 	double	angle;// /zoom out \zoom in
 	double		h;
 	double		w;
@@ -35,7 +37,7 @@ typedef struct s_equation
 } t_equation;
 
 t_point		get_point(t_ray r, double t);
-t_camera	camera(t_point origin, t_vec forward, double fov);
+t_camera	camera(t_point origin, t_vec forward, double fov, t_vec random);
 t_ray		ray(t_point o, t_point p);
 double		ft_map(double x, double from1, double to1, double from2, double to2);
 t_point		pixel_to_point(t_camera cam, int x, int y);

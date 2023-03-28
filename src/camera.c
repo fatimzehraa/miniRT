@@ -4,11 +4,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-t_camera	camera(t_point origin, t_vec forward, double fov)
+t_camera	camera(t_point origin, t_vec forward, double fov, t_vec random)
 {
 	t_camera	cam;
 	cam.o = origin;
-	cam.forward = forward;
+	cam.forward = norm(forward);
+	cam.up = vec_cross(cam.forward, random);
+	cam.right = vec_cross(cam.up, cam.forward);
 	cam.angle = fov;
 	cam.h = tan(fov / 2);
 	cam.w = cam.h * WIN_SIDE / WIN_SIDE;
@@ -51,7 +53,6 @@ t_pixel point_to_pixel(t_camera cam, t_point p)
 t_equation intersection(t_ray r, t_sphere s)
 {
 	t_equation eq;
-	r.o.z = -2;
 	t_vec c = sub(r.o, s.o);
 //	printf("c.x = %f, c.y = %f, c.z = %f\n", s.o.x, s.o.y, s.o.z);
 	eq.a = vec_dot(r.dir, r.dir);

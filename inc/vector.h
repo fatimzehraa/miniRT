@@ -39,5 +39,6 @@ t_vec	vec_div(t_vec v1, t_vec v2);
 double	vec_dot(t_vec v1, t_vec v2);
 t_vec	vec_cross(t_vec v1, t_vec v2);
 double	magnitude(t_vec v);
+int vec_cmp(t_vec v1, t_vec v2);
 t_vec	norm(t_vec v1);
 #endif

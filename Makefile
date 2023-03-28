@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Wunused -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -Wunused -g #-fsanitize=address
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	LDFLAGS = -lmlx -lXext -lX11 -lm -lbsd
@@ -22,7 +22,7 @@ NAME = miniRT
 all: $(NAME)
 
 $(NAME): $(OBG)
-	$(CC) $^ -o $@ $(LDFLAGS) -fsanitize=address
+	$(CC) $^ -o $@ $(LDFLAGS) #-fsanitize=address
 
 $(BUILD_DIR)/%.o: src/%.c #$(INCLUDES)
 	mkdir -p $(@D)

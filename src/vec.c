@@ -57,6 +57,13 @@ t_vec norm(t_vec v1)
 	return (v);
 }
 
+int vec_cmp(t_vec v1, t_vec v2)
+{
+	if (v1.x == v2.x && v1.y == v2.y && v1.z == v2.z)
+		return (1);
+	return (0);
+}
+
 int vec_rgv(t_vec v)
 {
 	int color;

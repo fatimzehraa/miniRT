@@ -84,6 +84,7 @@ static int parse_shape(t_ctx *ctx, char *line)
 
 static int parse_camera(char *line, t_ctx *ctx)
 {
+	t_vec random = norm((t_vec){1, 0, 0});
 	if (!is_same(&line, "C "))
 		return (-1);
 	ctx->cam = malloc(sizeof(t_camera));
@@ -95,7 +96,10 @@ static int parse_camera(char *line, t_ctx *ctx)
 		return (0);
 	if (!parse_float(&line, &ctx->cam->angle))
 		return (0);
-	*ctx->cam = camera(ctx->cam->o, ctx->cam->forward, ctx->cam->angle);
+	ctx->cam->forward = norm(ctx->cam->forward);
+	if (vec_cmp(ctx->cam->forward, random))
+		random = norm((t_vec){0, 1, 0});
+	*ctx->cam = camera(ctx->cam->o, ctx->cam->forward, ctx->cam->angle, random);
 	return (1);
 }
 
