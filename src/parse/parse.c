@@ -96,6 +96,7 @@ static int parse_camera(char *line, t_ctx *ctx)
 		return (0);
 	if (!parse_float(&line, &ctx->cam->angle))
 		return (0);
+	ctx->cam->angle = ctx->cam->angle * M_PI / 180;
 	ctx->cam->forward = norm(ctx->cam->forward);
 	if (vec_cmp(ctx->cam->forward, random))
 		random = norm((t_vec){0, 1, 0});

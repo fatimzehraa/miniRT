@@ -21,13 +21,13 @@ t_vec put_color(t_ray r, t_ctx ctx)
 		if (e.delta >= 0)
 		{
 			e.p_shape = vec_add(vec_muln(r.dir, e.t), r.o);
-			e.r_light = ray(ctx.lights->o, e.p_shape);
-			if (e.t > 0 && e_min.t >= e.t)// && intersect_light(e.r_light, ctx.s))
+			e.r_light = ray(e.p_shape, ctx.lights->o);
+			if (e.t > 0 && e_min.t >= e.t)
 				e_min = e;
 		}
 		s = s->next;
 	}
-	if (e_min.t == INFINITY)
+	if (e_min.t == INFINITY || !intersect_light(e_min.r_light, ctx.s))
 		return ((t_vec){0,0,0});
 	return (e_min.shape->color);
 }
@@ -46,13 +46,15 @@ void render_(t_ctx ctx)
 		x = 0;
 		while (x < WIN_SIDE)
 		{
-			p.x = ft_map(x, 0, WIN_SIDE, ctx.cam->w, -ctx.cam->w);
-			p.y = ft_map(y, 0, WIN_SIDE, -ctx.cam->h, ctx.cam->h);
+			p.x = ft_map(x, 0, WIN_SIDE, -ctx.cam->w, ctx.cam->w);
+			p.y = ft_map(y, 0, WIN_SIDE, ctx.cam->h, -ctx.cam->h);
+
 			r.o = ctx.cam->o;
-			r.dir = vec_add(ctx.cam->forward, vec_add(vec_muln(ctx.cam->up, p.x), vec_muln(ctx.cam->right, p.y)));
+			r.dir = vec_add(ctx.cam->forward, vec_add(vec_muln(ctx.cam->up, p.y), vec_muln(ctx.cam->right, p.x)));
 			r.dir = norm(r.dir);
-			r = ray(ctx.cam->o, p);
+			//r = ray(ctx.cam->o, p);
 			color = put_color(r, ctx);
+			//TODO: draw image .. my_pixel_put
 			mlx_pixel_put(ctx.mlx, ctx.win, x, y, rgb(color.x, color.y, color.z));
 			x++;
 		}

@@ -20,7 +20,7 @@ int	intersect_light(t_ray ray, t_shape *shape)
 	while (shape)
 	{
 		e = shape->intersection(ray, shape);
-		if (e.delta > 0)
+		if (e.delta > EPSILON)
 		{
 			if (e.t1 > EPSILON || e.t2 > EPSILON)
 				return (0);

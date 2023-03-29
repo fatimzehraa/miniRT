@@ -18,7 +18,6 @@ t_equation sphere_intersection(t_ray r, t_shape *s)
 	eq.t2 = (-eq.b - sqrt(eq.delta)) / (2 * eq.a);
 	if (eq.t1 < EPSILON && eq.t2 < EPSILON)
 	{
-		printf("t1 = %f, t2 = %f\n", eq.t1, eq.t2);
 		eq.delta = -1;
 		return (eq);
 	}

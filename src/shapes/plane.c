@@ -19,7 +19,7 @@ t_equation plane_intersection(t_ray r, t_shape *s)
 		if (t >= 0.001)
 		{
 			e.delta = 1;
-			e.t1 = t;
+			e.t = t;
 			return (e);
 		}
 		e.delta = -1;
