@@ -1,11 +1,31 @@
 [
  {
-  "directory": "/Users/fael-bou/Desktop/projects/minirt",
+  "directory": "/Users/fael-bou/Desktop/n/minirt",
   "arguments": [
    "cc",
    "-Wall",
    "-Wextra",
    "-Werror",
+   "-Wunused",
+   "-g",
+   "-I",
+   "inc",
+   "-I/usr/local/include",
+   "-c",
+   "src/main.c",
+   "-o",
+   "build/main.o"
+  ],
+  "file": "src/main.c"
+ },
+ {
+  "directory": "/Users/fael-bou/Desktop/n/minirt",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Wunused",
    "-g",
    "-I",
    "inc",
@@ -16,5 +36,290 @@
    "build/render.o"
   ],
   "file": "src/render.c"
+ },
+ {
+  "directory": "/Users/fael-bou/Desktop/n/minirt",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Wunused",
+   "-g",
+   "-I",
+   "inc",
+   "-I/usr/local/include",
+   "-c",
+   "src/camera.c",
+   "-o",
+   "build/camera.o"
+  ],
+  "file": "src/camera.c"
+ },
+ {
+  "directory": "/Users/fael-bou/Desktop/n/minirt",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Wunused",
+   "-g",
+   "-I",
+   "inc",
+   "-I/usr/local/include",
+   "-c",
+   "src/vec.c",
+   "-o",
+   "build/vec.o"
+  ],
+  "file": "src/vec.c"
+ },
+ {
+  "directory": "/Users/fael-bou/Desktop/n/minirt",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Wunused",
+   "-g",
+   "-I",
+   "inc",
+   "-I/usr/local/include",
+   "-c",
+   "src/vec_multipliying.c",
+   "-o",
+   "build/vec_multipliying.o"
+  ],
+  "file": "src/vec_multipliying.c"
+ },
+ {
+  "directory": "/Users/fael-bou/Desktop/n/minirt",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Wunused",
+   "-g",
+   "-I",
+   "inc",
+   "-I/usr/local/include",
+   "-c",
+   "src/shapes/sphere.c",
+   "-o",
+   "build/shapes/sphere.o"
+  ],
+  "file": "src/shapes/sphere.c"
+ },
+ {
+  "directory": "/Users/fael-bou/Desktop/n/minirt",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Wunused",
+   "-g",
+   "-I",
+   "inc",
+   "-I/usr/local/include",
+   "-c",
+   "src/shapes/plane.c",
+   "-o",
+   "build/shapes/plane.o"
+  ],
+  "file": "src/shapes/plane.c"
+ },
+ {
+  "directory": "/Users/fael-bou/Desktop/n/minirt",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Wunused",
+   "-g",
+   "-I",
+   "inc",
+   "-I/usr/local/include",
+   "-c",
+   "src/shapes/cylinder.c",
+   "-o",
+   "build/shapes/cylinder.o"
+  ],
+  "file": "src/shapes/cylinder.c"
+ },
+ {
+  "directory": "/Users/fael-bou/Desktop/n/minirt",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Wunused",
+   "-g",
+   "-I",
+   "inc",
+   "-I/usr/local/include",
+   "-c",
+   "src/shapes/lists.c",
+   "-o",
+   "build/shapes/lists.o"
+  ],
+  "file": "src/shapes/lists.c"
+ },
+ {
+  "directory": "/Users/fael-bou/Desktop/n/minirt",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Wunused",
+   "-g",
+   "-I",
+   "inc",
+   "-I/usr/local/include",
+   "-c",
+   "src/utils.c",
+   "-o",
+   "build/utils.o"
+  ],
+  "file": "src/utils.c"
+ },
+ {
+  "directory": "/Users/fael-bou/Desktop/n/minirt",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Wunused",
+   "-g",
+   "-I",
+   "inc",
+   "-I/usr/local/include",
+   "-c",
+   "src/light.c",
+   "-o",
+   "build/light.o"
+  ],
+  "file": "src/light.c"
+ },
+ {
+  "directory": "/Users/fael-bou/Desktop/n/minirt",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Wunused",
+   "-g",
+   "-I",
+   "inc",
+   "-I/usr/local/include",
+   "-c",
+   "src/parse/parse.c",
+   "-o",
+   "build/parse/parse.o"
+  ],
+  "file": "src/parse/parse.c"
+ },
+ {
+  "directory": "/Users/fael-bou/Desktop/n/minirt",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Wunused",
+   "-g",
+   "-I",
+   "inc",
+   "-I/usr/local/include",
+   "-c",
+   "src/parse/str.c",
+   "-o",
+   "build/parse/str.o"
+  ],
+  "file": "src/parse/str.c"
+ },
+ {
+  "directory": "/Users/fael-bou/Desktop/n/minirt",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Wunused",
+   "-g",
+   "-I",
+   "inc",
+   "-I/usr/local/include",
+   "-c",
+   "src/parse/utils.c",
+   "-o",
+   "build/parse/utils.o"
+  ],
+  "file": "src/parse/utils.c"
+ },
+ {
+  "directory": "/Users/fael-bou/Desktop/n/minirt",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Wunused",
+   "-g",
+   "-I",
+   "inc",
+   "-I/usr/local/include",
+   "-c",
+   "src/parse/gnl/get_next_line.c",
+   "-o",
+   "build/parse/gnl/get_next_line.o"
+  ],
+  "file": "src/parse/gnl/get_next_line.c"
+ },
+ {
+  "directory": "/Users/fael-bou/Desktop/n/minirt",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Wunused",
+   "-g",
+   "-I",
+   "inc",
+   "-I/usr/local/include",
+   "-c",
+   "src/parse/gnl/get_next_line_utils.c",
+   "-o",
+   "build/parse/gnl/get_next_line_utils.o"
+  ],
+  "file": "src/parse/gnl/get_next_line_utils.c"
+ },
+ {
+  "directory": "/Users/fael-bou/Desktop/n/minirt",
+  "arguments": [
+   "cc",
+   "-Wall",
+   "-Wextra",
+   "-Werror",
+   "-Wunused",
+   "-g",
+   "-I",
+   "inc",
+   "-I/usr/local/include",
+   "-c",
+   "src/debug.c",
+   "-o",
+   "build/debug.o"
+  ],
+  "file": "src/debug.c"
  }
 ]

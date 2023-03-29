@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Wunused -g #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -Wunused -fsanitize=address
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	LDFLAGS = -lmlx -lXext -lX11 -lm -lbsd
@@ -7,7 +7,7 @@ endif
 ifeq ($(UNAME_S),Darwin)
 	LDFLAGS = -lmlx -framework OpenGL -framework AppKit
 endif
-#LDFLAGS += -fsanitize=address
+LDFLAGS += -fsanitize=address
 
 BUILD_DIR = build
 #HEADER_FILES = 
