@@ -16,6 +16,9 @@ typedef struct s_ctx
 	t_shape	*s;
 	t_camera *cam;
 	t_light	*lights;
+	int		x;
+	int		y;
+	t_point	p;
 }	t_ctx;
 
 long rgb(double r, double g, double b);
