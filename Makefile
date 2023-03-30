@@ -10,9 +10,9 @@ endif
 LDFLAGS += -fsanitize=address
 
 BUILD_DIR = build
-#HEADER_FILES = 
+INC = -I./inc -I/usr/local/include
+HEADER_FILES = minirt.h camera.h vector.h shape.h parse.h 
 INCLUDES = $(addprefix inc/, $(HEADER_FILES))
-INC = -I inc -I/usr/local/include
 FILES = main.o render.o camera.o vec.o vec_multipliying.o shapes/sphere.o shapes/plane.o shapes/cylinder.o shapes/lists.o utils.o light.o\
 		parse/parse.o parse/str.o parse/utils.o parse/gnl/get_next_line.o parse/gnl/get_next_line_utils.o debug.o
 OBG = $(addprefix $(BUILD_DIR)/, $(FILES))
@@ -24,7 +24,7 @@ all: $(NAME)
 $(NAME): $(OBG)
 	$(CC) $^ -o $@ $(LDFLAGS) #-fsanitize=address
 
-$(BUILD_DIR)/%.o: src/%.c #$(INCLUDES)
+$(BUILD_DIR)/%.o: src/%.c $(INCLUDES)
 	mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
