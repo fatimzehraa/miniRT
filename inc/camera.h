@@ -5,13 +5,17 @@
 
 typedef struct s_shape t_shape;
 
+/*
+ * angle: zoom out \zoom in
+ * */
+
 typedef struct	s_camera
 {
 	t_point	o;
 	t_vec	forward;
 	t_vec	right;
 	t_vec	up;
-	double	angle;// /zoom out \zoom in
+	double	angle;
 	double		h;
 	double		w;
 }				t_camera;

@@ -62,11 +62,29 @@ void print_light(t_light *light)
 	printf("\n");
 }
 
+
+void print_ambient(t_light *amb){
+	printf(" ======= Ambient ==========\n");
+	printf("\ncolor:");
+	print_vec(&amb->color);
+
+	printf("\nintensity: %f\n", amb->ratio);
+
+	printf("\n");
+}
+
 void print_ctx(t_ctx ctx)
 {
-	print_cam(ctx.cam);
-	print_light(ctx.lights);
 	t_shape *s = ctx.s;
+	t_light *l= ctx.lights;
+
+	print_cam(ctx.cam);
+	print_ambient(ctx.ambient);
+	while (l)
+	{
+		print_light(l);
+		l = l->next;
+	}
 	while (s)
 	{
 		print_shape(s);

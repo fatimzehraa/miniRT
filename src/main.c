@@ -20,8 +20,11 @@ int main(int ac, char **av)
 
 	if (!parse(av[1], &ctx))
 		return EXIT_FAILURE;
-	//*ctx.cam = camera((t_point){0,0,-1}, (t_vec){0,0,1}, M_PI/4);
-	//ctx.lights = new_light((t_point){0,5,3}, (t_vec){1,1,1});
+	if (!ctx.cam || !ctx.ambient)
+	{
+		printf("please add missing elements (camera and ambient light are required)");
+		return EXIT_FAILURE;
+	}
 	// debug_ctx(ctx);
 	print_ctx(ctx);
 

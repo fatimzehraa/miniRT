@@ -1,5 +1,6 @@
 #include "shape.h"
 #include <stdlib.h>
+#include "minirt.h"
 
 t_shape	*ft_lstlast(t_shape *lst)
 {
@@ -51,3 +52,33 @@ int	add_back(t_shape **lst, t_shape *new)
 	return (1);
 }
 
+t_light	*ft_lstlast_light(t_light *lst)
+{
+	t_light	*cur;
+	t_light	*last;
+
+	cur = lst;
+	last = lst;
+	while (cur)
+	{
+		last = cur;
+		cur = cur->next;
+	}
+	return (last);
+}
+
+int	add_back_light(t_light **lst, t_light *new)
+{
+	t_light *last;
+
+	if (new == NULL)
+		return (0);
+	if (*lst == 0)
+	{
+		*lst = new;
+		return (1);
+	}
+	last = ft_lstlast_light(*lst);
+	last->next = new;
+	return (1);
+}

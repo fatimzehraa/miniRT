@@ -11,14 +11,15 @@
 
 typedef struct s_ctx
 {
-	void	*mlx;
-	void	*win;
-	t_shape	*s;
-	t_camera *cam;
-	t_light	*lights;
-	int		x;
-	int		y;
-	t_point	p;
+	void		*mlx;
+	void		*win;
+	t_shape		*s;
+	t_camera	*cam;
+	t_light		*lights;
+	t_light		*ambient;
+	int			x;
+	int			y;
+	t_point		p;
 }	t_ctx;
 
 long rgb(double r, double g, double b);

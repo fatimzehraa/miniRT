@@ -4,6 +4,7 @@
 #include "vector.h"
 #include "camera.h"
 
+typedef struct s_light t_light;
 
 typedef struct s_shape {
 	t_vec			color;
@@ -22,6 +23,9 @@ typedef struct s_shape {
 
 t_shape *lst_new();
 int	add_back(t_shape **lst, t_shape *new);
+t_light	*ft_lstlast_light(t_light *lst);
+int	add_back_light(t_light **lst, t_light *new);
+
 t_shape *new_sphere(t_point origin, double r);
 t_vec sp_normal_at(t_point p, t_shape *s);
 void circle(t_point center, int r, void *mlx, void *win);
