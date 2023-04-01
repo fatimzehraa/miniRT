@@ -2,28 +2,28 @@
 #include "shape.h"
 #include "vector.h"
 
-int belong_to_cylinder(t_point p, t_shape *s)
+int	belong_to_cylinder(t_point p, t_shape *s)
 {
-	double m;
-	t_point A;
+	double	m;
+	t_point	a;
 
-	m = vec_dot(vec_sub(p, s->origin), s->forward) / vec_dot(s->forward, s->forward);
-	A = vec_add(s->origin, vec_muln(s->forward, m));
-	if (magnitude(vec_sub(A, s->origin)) > s->height / 2)
+	m = dot(sub(p, s->origin), s->forward) / dot(s->forward, s->forward);
+	a = add(s->origin, muln(s->forward, m));
+	if (magnitude(sub(a, s->origin)) > s->height / 2)
 		return (0);
 	return (1);
 }
 
-t_equation cylinder_intersection(t_ray r, t_shape *s)
+t_equation	cylinder_intersection(t_ray r, t_shape *s)
 {
-	t_equation e;
-	t_vec X;
+	t_equation	e;
+	t_vec		x;
 
 	e.shape = s;
-	X = vec_sub(r.o, s->origin);
-	e.a = vec_dot(r.dir, r.dir) - pow(vec_dot(r.dir, s->forward), 2);
-	e.b = 2 * (vec_dot(r.dir, X) - vec_dot(r.dir, s->forward) * vec_dot(X, s->forward));
-	e.c = vec_dot(X, X) - pow(vec_dot(X, s->forward), 2) - pow(s->r, 2);
+	x = sub(r.o, s->origin);
+	e.a = dot(r.dir, r.dir) - pow(dot(r.dir, s->forward), 2);
+	e.b = 2 * (dot(r.dir, x) - dot(r.dir, s->forward) * dot(x, s->forward));
+	e.c = dot(x, x) - pow(dot(x, s->forward), 2) - pow(s->r, 2);
 	e.delta = pow(e.b, 2) - 4 * e.a * e.c;
 	if (e.delta < 0)
 		return (e);
@@ -38,9 +38,9 @@ t_equation cylinder_intersection(t_ray r, t_shape *s)
 	return (e);
 }
 
-t_shape *new_cylinder(t_point p, t_vec v, double r, double h)
+t_shape	*new_cylinder(t_point p, t_vec v, double r, double h)
 {
-	t_shape *s;
+	t_shape	*s;
 
 	s = lst_new();
 	s->origin = p;

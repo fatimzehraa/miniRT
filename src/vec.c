@@ -10,37 +10,7 @@ t_vec	vec(double x, double y, double z)
 	return (v);
 }
 
-t_vec	vec_add(t_vec v1, t_vec v2)
-{
-	t_vec	v;
-
-	v.x = v1.x + v2.x;
-	v.y = v1.y + v2.y;
-	v.z = v1.z + v2.z;
-	return (v);
-}
-
-t_vec	sub(t_point v1, t_point v2)
-{
-	t_vec	v;
-
-	v.x = v1.x - v2.x;
-	v.y = v1.y - v2.y;
-	v.z = v1.z - v2.z;
-	return (v);
-}
-
-t_vec	vec_sub(t_vec v1, t_vec v2)
-{
-	t_vec	v;
-
-	v.x = v1.x - v2.x;
-	v.y = v1.y - v2.y;
-	v.z = v1.z - v2.z;
-	return (v);
-}
-
-double magnitude(t_vec v)
+double	magnitude(t_vec v)
 {
 	double	m;
 
@@ -48,25 +18,28 @@ double magnitude(t_vec v)
 	return (m);
 }
 
-t_vec norm(t_vec v1)
+t_vec	norm(t_vec v1)
 {
-	t_vec v;
-	v.x = v1.x/magnitude(v1);
-	v.y = v1.y/magnitude(v1);
-	v.z = v1.z/magnitude(v1);
+	t_vec	v;
+
+	v.x = v1.x / magnitude(v1);
+	v.y = v1.y / magnitude(v1);
+	v.z = v1.z / magnitude(v1);
 	return (v);
 }
 
-int vec_cmp(t_vec v1, t_vec v2)
+int	cmp(t_vec v1, t_vec v2)
 {
 	if (v1.x == v2.x && v1.y == v2.y && v1.z == v2.z)
 		return (1);
 	return (0);
 }
 
-int vec_rgv(t_vec v)
+int	rgv(t_vec v)
 {
-	int color;
-	color = 0 | ( (int)(v.x * 255) << 16 | (int)(v.y * 255) << 8 | (int)v.z * 255);
+	int	color;
+
+	color = 0 | ((int)(v.x * 255) << 16
+			| (int)(v.y * 255) << 8 | (int)v.z * 255);
 	return (color);
 }

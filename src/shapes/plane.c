@@ -2,17 +2,20 @@
 #include "shape.h"
 #include "vector.h"
 #include <math.h>
-
 #include <stdio.h>
-t_equation plane_intersection(t_ray r, t_shape *s)
+
+t_equation	plane_intersection(t_ray r, t_shape *s)
 {
-	t_equation e;
-	double t;
+	t_equation	e;
+	double		t;
+	double		r1;
+	double		r2;
+	double		r3;
 
 	e.shape = s;
-	double r1 = vec_dot(r.o, s->forward);
-	double r2 = vec_dot(r.dir, s->forward);
-	double r3 = vec_dot(s->origin, s->forward);
+	r1 = dot(r.o, s->forward);
+	r2 = dot(r.dir, s->forward);
+	r3 = dot(s->origin, s->forward);
 	if (fabs(r2) > 0.001)
 	{
 		t = (-r1 + r3) / r2;
@@ -29,15 +32,15 @@ t_equation plane_intersection(t_ray r, t_shape *s)
 	return (e);
 }
 
-t_vec pl_normal_at(t_point p, t_shape *s)
+t_vec	pl_normal_at(t_point p, t_shape *s)
 {
 	(void)(p);
 	return (s->forward);
 }
 
-t_shape *new_plane(t_point p, t_vec v)
+t_shape	*new_plane(t_point p, t_vec v)
 {
-	t_shape *s;
+	t_shape	*s;
 
 	s = lst_new();
 	s->origin = p;

@@ -15,7 +15,7 @@ t_light	*new_light(t_point origine, t_vec color)
 
 int	intersect_light(t_ray ray, t_shape *shape)
 {
-	t_equation e;
+	t_equation	e;
 
 	while (shape)
 	{

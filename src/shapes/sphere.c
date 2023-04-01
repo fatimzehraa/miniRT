@@ -2,15 +2,17 @@
 #include "shape.h"
 #include "stdio.h"
 #include "vector.h"
-t_equation sphere_intersection(t_ray r, t_shape *s)
+
+t_equation	sphere_intersection(t_ray r, t_shape *s)
 {
-	t_equation eq;
+	t_equation	eq;
+	t_point		c;
+
 	eq.shape = s;
-	t_vec c = sub(r.o, s->origin);
- 	//printf("c.x = %f, c.y = %f, c.z = %f\n", s->origin.x, s.origin.y, s.origin.z);
-	eq.a = vec_dot(r.dir, r.dir);
-	eq.b = 2 * vec_dot(r.dir, c);
-	eq.c = vec_dot(c, c) - pow(s->r, 2);
+	c = sub(r.o, s->origin);
+	eq.a = dot(r.dir, r.dir);
+	eq.b = 2 * dot(r.dir, c);
+	eq.c = dot(c, c) - pow(s->r, 2);
 	eq.delta = powf(eq.b, 2) - 4 * eq.a * eq.c;
 	if (eq.delta < -EPSILON)
 		return (eq);
@@ -28,24 +30,22 @@ t_equation sphere_intersection(t_ray r, t_shape *s)
 	return (eq);
 }
 
-// not used yet
-t_vec sp_normal_at(t_point p, t_shape *s)
+t_vec	sp_normal_at(t_point p, t_shape *s)
 {
-	t_sphere *sp;
+	t_sphere	*sp;
 
 	sp = (t_sphere *) s;
 	return (norm(sub(p, sp->o)));
 }
 
-t_shape *new_sphere(t_point origin, double r)
+t_shape	*new_sphere(t_point origin, double r)
 {
-	t_shape *s;
+	t_shape	*s;
 
 	s = lst_new();
 	s->origin = origin;
 	s->r = r;
 	s->intersection = sphere_intersection;
 	s->normal_at = sp_normal_at;
-
-	return s;
+	return (s);
 }
