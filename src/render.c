@@ -32,7 +32,8 @@ t_vec	put_color(t_ray r, t_ctx ctx)
 	co = dot(e_min.r_light.dir, e_min.shape->normal_at(e.p_shape, e_min.shape));
 	if (e_min.t == INFINITY || !intersect_light(e_min.r_light, ctx.s)
 		|| (co < 0))
-		return ((t_vec){0, 0, 0});
+		return (muln(e_min.shape->color, 0.1));
+	//	return ((t_vec){0, 0, 0});
 	return (mul(muln(e_min.shape->color, co), ctx.lights->color));
 }
 
