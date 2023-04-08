@@ -2,6 +2,7 @@
 #include "light.h"
 #include "camera.h"
 #include "shape.h"
+#include <math.h>
 
 t_light	*new_light(t_point origine, t_vec color)
 {
@@ -13,7 +14,7 @@ t_light	*new_light(t_point origine, t_vec color)
 	return (light);
 }
 
-int	intersect_light(t_ray ray, t_shape *shape)
+int	intersect_light(t_ray ray, t_shape *shape, double distance)
 {
 	t_equation	e;
 
@@ -22,7 +23,7 @@ int	intersect_light(t_ray ray, t_shape *shape)
 		e = shape->intersection(ray, shape);
 		if (e.delta > EPSILON)
 		{
-			if (e.t1 > EPSILON || e.t2 > EPSILON)
+			if ((e.t1 > EPSILON || e.t2 > EPSILON) && distance > e.t)
 				return (0);
 		}
 		shape = shape->next;

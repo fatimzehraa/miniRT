@@ -25,10 +25,15 @@ t_equation	cylinder_intersection(t_ray r, t_shape *s)
 	e.b = 2 * (dot(r.dir, x) - dot(r.dir, s->forward) * dot(x, s->forward));
 	e.c = dot(x, x) - pow(dot(x, s->forward), 2) - pow(s->r, 2);
 	e.delta = pow(e.b, 2) - 4 * e.a * e.c;
-	if (e.delta < 0)
+	if (e.delta < -EPSILON)
 		return (e);
 	e.t1 = (-e.b - sqrt(e.delta)) / (2 * e.a);
 	e.t2 = (-e.b + sqrt(e.delta)) / (2 * e.a);
+	if (e.t1 < EPSILON && e.t2 < EPSILON)
+	{
+		e.delta = -1;
+		return (e);
+	}
 	if (e.t1 < e.t2)
 		e.t = e.t1;
 	else
@@ -36,6 +41,18 @@ t_equation	cylinder_intersection(t_ray r, t_shape *s)
 	if (belong_to_cylinder(get_point(r, e.t), s) == 0)
 		e.delta = -1;
 	return (e);
+}
+
+t_vec	cy_normal_at(t_point p, t_shape *s)
+{
+	t_vec	n;
+	t_point	a;
+	double	m;
+
+	m = dot(sub(p, s->origin), s->forward) / dot(s->forward, s->forward);
+	a = add(s->origin, muln(s->forward, m));
+	n = sub(p, a);
+	return (norm(n));
 }
 
 t_shape	*new_cylinder(t_point p, t_vec v, double r, double h)
@@ -48,5 +65,6 @@ t_shape	*new_cylinder(t_point p, t_vec v, double r, double h)
 	s->r = r;
 	s->height = h;
 	s->intersection = cylinder_intersection;
+	s->normal_at = cy_normal_at;
 	return (s);
 }

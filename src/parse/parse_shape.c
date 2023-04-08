@@ -1,4 +1,5 @@
 #include "parse.h"
+#include "shape.h"
 
 int	parse_sphere(char **line, t_shape *shape)
 {
@@ -27,6 +28,9 @@ int	parse_cy(char **line, t_shape *shape)
 	if (!parse_color(line, &shape->color))
 		return (0);
 	shape->intersection = cylinder_intersection;
+	shape->normal_at = cy_normal_at;
+	add_back(&shape, new_cap(shape, 1));
+	add_back(&shape, new_cap(shape, -1));
 	return (1);
 }
 
@@ -36,6 +40,7 @@ int	parse_plane(char **line, t_shape *shape)
 		return (0);
 	if (!parse_vec(line, &shape->forward) || !skip(line))
 		return (0);
+	shape->forward = norm(shape->forward);
 	if (!parse_color(line, &shape->color))
 		return (0);
 	shape->normal_at = pl_normal_at;

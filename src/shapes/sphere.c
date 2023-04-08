@@ -32,10 +32,7 @@ t_equation	sphere_intersection(t_ray r, t_shape *s)
 
 t_vec	sp_normal_at(t_point p, t_shape *s)
 {
-	t_sphere	*sp;
-
-	sp = (t_sphere *) s;
-	return (norm(sub(p, sp->o)));
+	return (norm(sub(p, s->origin)));
 }
 
 t_shape	*new_sphere(t_point origin, double r)

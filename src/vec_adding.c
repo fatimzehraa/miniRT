@@ -29,3 +29,11 @@ t_vec	vsub(t_vec v1, t_vec v2)
 	v.z = v1.z - v2.z;
 	return (v);
 }
+
+t_vec reflect(t_vec v, t_vec n)
+{
+	t_vec	r;
+
+	r = sub(v, muln(n, 2.0 * dot(v, n)));
+	return (r);
+}

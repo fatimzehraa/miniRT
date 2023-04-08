@@ -16,6 +16,7 @@ typedef struct s_ctx
 	t_shape		*s;
 	t_camera	*cam;
 	t_light		*lights;
+	t_light		*ambient;
 	int			x;
 	int			y;
 	t_point		p;
@@ -36,5 +37,10 @@ void	render_(t_ctx ctx);
 void	print_shape(t_shape *shape);
 void	print_vec(t_vec *vec);
 void	print_ctx(t_ctx ctx);
+void free_shapes(t_shape *s);
+void free_lights(t_light *l);
+void	free_ctx(t_ctx *ctx);
+int	key_hook(int keycode, t_ctx *ctx);
+int	quit(t_ctx *ctx);
 
 #endif
