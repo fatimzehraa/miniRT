@@ -11,10 +11,7 @@ static double	_parse_float(char **p, int is_int)
 	s = *p;
 	is_neg = (*s == '-' && s++);
 	while (*s && *s >= '0' && *s <= '9')
-	{
-		d = d * 10 + *s - '0';
-		s++;
-	}
+		d = d * 10 + *(s++) - '0';
 	if (*s == '.' && !is_int)
 	{
 		s++;
@@ -30,6 +27,16 @@ static double	_parse_float(char **p, int is_int)
 	if (is_neg)
 		d = -d;
 	return (d);
+}
+
+int	parse_float_d(char **p, double *d, double min, double max)
+{
+	if (**p == '\0')
+		return (0);
+	*d = _parse_float(p, 0);
+	if ((**p == ' ' || **p == '\0' || **p == ',') && *d >= min && *d <= max)
+		return (1);
+	return (0);
 }
 
 int	parse_float(char **p, double *d)

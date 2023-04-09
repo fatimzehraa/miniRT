@@ -18,20 +18,22 @@ static int	parse_shape(t_ctx *ctx, char *line)
 	if (is_same(&line, "sp "))
 	{
 		if (!parse_sphere(&line, shape))
-			return (free(shape), -1);
+			return (free_shapes(shape), -1);
 	}
 	else if (is_same(&line, "cy "))
 	{
 		if (!parse_cy(&line, shape))
-			return (free(shape), -1);
+			return (free_shapes(shape), -1);
 	}
 	else if (is_same(&line, "pl "))
 	{
 		if(!parse_plane(&line, shape))
-			return (free(shape), -1);
+			return (free_shapes(shape), -1);
 	}
 	else
-		return (free(shape), -1);
+		return (free_shapes(shape), -1);
+	if (skip(&line) && *line != '\0')
+		return (free_shapes(shape), -3);
 	add_back(&ctx->s, shape);
 	return (1);
 }
@@ -43,6 +45,7 @@ static int	parse_camera(t_ctx *ctx, char *line)
 	random = norm((t_vec){1, 0, 0});
 	if (!is_same(&line, "C "))
 		return (-1);
+	skip(&line);
 	if (ctx->cam)
 		return -2;
 	ctx->cam = malloc(sizeof(t_camera));
@@ -52,13 +55,15 @@ static int	parse_camera(t_ctx *ctx, char *line)
 		return (0);
 	if (!parse_vec(&line, &ctx->cam->forward) || !skip(&line))
 		return (0);
-	if (!parse_float(&line, &ctx->cam->angle))
+	if (!parse_float_d(&line, &ctx->cam->angle,0, 180))
 		return (0);
 	ctx->cam->angle = ctx->cam->angle * M_PI / 180;
 	ctx->cam->forward = norm(ctx->cam->forward);
 	if (cmp(ctx->cam->forward, random))
 		random = norm((t_vec){0, 1, 0});
 	*ctx->cam = camera(ctx->cam->o, ctx->cam->forward, ctx->cam->angle, random);
+	if (skip(&line) && *line != '\0')
+		return (-3);
 	return (1);
 }
 
@@ -66,19 +71,22 @@ static int	parse_light(t_ctx *ctx, char *line)
 {
 	t_light	*light;
 
-	if (!is_same(&line, "L "))
+	if (!is_same(&line, "l "))
 		return (-1);
+	skip(&line);
 	light = malloc(sizeof(t_light));
 	if (light == NULL)
 		return (0);
 	light->next = NULL;
 	if (!parse_vec(&line, &light->o) || !skip(&line))
 		return (0);
-	if (!parse_float(&line, &light->ratio) || !skip(&line))
+	if ((!parse_float_d(&line, &light->ratio, 0, 1)) || !skip(&line))
 		return (0);
 	if (!parse_color(&line, &light->color))
 		return (0);
 	add_back_light(&ctx->lights, light);
+	if (skip(&line) && *line != '\0')
+		return (-3);
 	return (1);
 }
 
@@ -86,8 +94,9 @@ static int parse_ambient(t_ctx *ctx, char *line)
 {
 	if (!is_same(&line, "A "))
 		return (-1);
+	skip(&line);
 	if (ctx->ambient)
-		return -2;
+		return (-2);
 	ctx->ambient = malloc(sizeof(t_light));
 	if (ctx->ambient == NULL)
 		return (0);
@@ -95,6 +104,8 @@ static int parse_ambient(t_ctx *ctx, char *line)
 		return (0);
 	if (!parse_color(&line, &ctx->ambient->color))
 		return (0);
+	if (skip(&line) && *line != '\0')
+		return (-3);
 	return (1);
 }
 
@@ -147,14 +158,10 @@ int	parse(char *filename, t_ctx *ctx)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		line[ft_strlen(line) - 1] = 0; // remove \n
+		line[ft_strlen(line) - 1] = '\0';
 		res = match(ctx, line);
-		if (res == 0)
-			return (printf("miniRT: failed to allocate memory \n"), close(fd), 0);
-		if (res == -1)
-			return (printf("miniRT: failed to parse line `%s` \n", line), close(fd), 0);
-		if (res == -2)
-			return (printf("miniRT: duplicated element `%s` \n", line), close(fd), 0);
+		if (!print_err(res, fd, line))
+			return (free(line), free_ctx(ctx), 0);
 		free(line);
 	}
 	return (close(fd), 1);

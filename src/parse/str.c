@@ -1,4 +1,5 @@
 #include<stddef.h>
+#include <stdio.h>
 
 #include "get_next_line.h"
 
@@ -18,5 +19,18 @@ int	is_same(char **line, const char *s2)
 		i++;
 	}
 	*line += n;
+	return (1);
+}
+
+int	print_err(int res, int fd, char *line)
+{
+	if (res == 0)
+		return (printf("miniRT: failed to parse line or allocate memory `%s`\n", line), close(fd), 0);
+	if (res == -1)
+		return (printf("miniRT: failed to parse line `%s` \n", line), close(fd), 0);
+	if (res == -2)
+		return (printf("miniRT: duplicated element `%s` \n", line), close(fd), 0);
+	if (res == -3)
+		return (printf("miniRT: extra chars at end of line `%s` \n", line), close(fd), 0);
 	return (1);
 }

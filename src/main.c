@@ -22,6 +22,7 @@ int	main(int ac, char **av)
 	if (!ctx.cam || !ctx.ambient)
 	{
 		printf("please add missing elements (camera and ambient light are required)");
+		free_ctx(&ctx);
 		return EXIT_FAILURE;
 	}
 	print_ctx(ctx);

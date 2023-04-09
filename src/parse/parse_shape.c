@@ -3,6 +3,7 @@
 
 int	parse_sphere(char **line, t_shape *shape)
 {
+	skip(line);
 	if (!parse_vec(line, &shape->origin) || !skip(line))
 		return (0);
 	if (!parse_float(line, &shape->r) || !skip(line))
@@ -16,6 +17,7 @@ int	parse_sphere(char **line, t_shape *shape)
 
 int	parse_cy(char **line, t_shape *shape)
 {
+	skip(line);
 	if (!parse_vec(line, &shape->origin) || !skip(line))
 		return (0);
 	if (!parse_vec(line, &shape->forward) || !skip(line))
@@ -36,6 +38,7 @@ int	parse_cy(char **line, t_shape *shape)
 
 int	parse_plane(char **line, t_shape *shape)
 {
+	skip(line);
 	if (!parse_vec(line, &shape->origin) || !skip(line))
 		return (0);
 	if (!parse_vec(line, &shape->forward) || !skip(line))
