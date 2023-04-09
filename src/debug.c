@@ -7,7 +7,7 @@
 
 void print_vec(t_vec *vec)
 {
-	printf("x: %f, y: %f, z: %f", vec->x, vec->y, vec->z);
+	printf("x: %f, y: %f, z: %f\n", vec->x, vec->y, vec->z);
 }
 
 

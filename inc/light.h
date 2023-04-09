@@ -4,7 +4,7 @@
 # include "vector.h"
 # include "camera.h"
 
-typedef struct	s_light
+typedef struct s_light
 {
 	t_point			o;
 	t_vec			dir;
@@ -14,5 +14,5 @@ typedef struct	s_light
 }				t_light;
 
 t_light	*new_light(t_point origine, t_vec color);
-int	intersect_light(t_ray ray, t_shape *shape);
+int		intersect_light(t_ray ray, t_shape *shape, double distance);
 #endif

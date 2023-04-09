@@ -4,7 +4,7 @@
 #include <math.h>
 #include <stdio.h>
 
-t_equation	plane_intersection(t_ray r, t_shape *s)
+t_equation	cap_intersection(t_ray r, t_shape *s)
 {
 	t_equation	e;
 	double		t;
@@ -21,6 +21,13 @@ t_equation	plane_intersection(t_ray r, t_shape *s)
 		t = (-r1 + r3) / r2;
 		if (t >= 0.001)
 		{
+			t_point p = get_point(r, t);
+			if (magnitude(sub(p, s->origin)) > s->r)
+			{
+				e.t = t;
+				e.delta = -1;
+				return (e);
+			}
 			e.delta = 1;
 			e.t = t;
 			return (e);
@@ -32,20 +39,18 @@ t_equation	plane_intersection(t_ray r, t_shape *s)
 	return (e);
 }
 
-t_vec	pl_normal_at(t_point p, t_shape *s)
-{
-	(void)(p);
-	return (norm(s->forward));
-}
-
-t_shape	*new_plane(t_point p, t_vec v)
+t_shape	*new_cap(t_shape *cy, int dir)
 {
 	t_shape	*s;
+	t_point p;
 
 	s = lst_new();
+	s->forward = muln(cy->forward, dir);
+	p = add(cy->origin, muln(s->forward, cy->height / 2));
 	s->origin = p;
-	s->forward = v;
-	s->intersection = plane_intersection;
+	s->r = cy->r;
+	s->color = cy->color;
+	s->intersection = cap_intersection;
 	s->normal_at = pl_normal_at;
 	return (s);
 }

@@ -17,7 +17,7 @@ t_shape	*ft_lstlast(t_shape *lst)
 	return (last);
 }
 
-t_shape *lst_new()
+t_shape	*lst_new(void)
 {
 	t_shape	*lst;
 

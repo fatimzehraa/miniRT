@@ -1,6 +1,6 @@
 #include "vector.h"
 
-t_vec	vec_mul(t_vec v1, t_vec v2)
+t_vec	mul(t_vec v1, t_vec v2)
 {
 	t_vec	v;
 
@@ -10,18 +10,20 @@ t_vec	vec_mul(t_vec v1, t_vec v2)
 	return (v);
 }
 
-t_vec vec_muln(t_vec v1, double num)
+t_vec	muln(t_vec v1, double num)
 {
-	t_vec v;
+	t_vec	v;
+
 	v.x = v1.x * num;
 	v.y = v1.y * num;
 	v.z = v1.z * num;
 	return (v);
 }
 
-t_vec	vec_div(t_vec v1, t_vec v2)
+t_vec	vdiv(t_vec v1, t_vec v2)
 {
 	t_vec	v;
+
 	if (v2.x == 0 || v2.y == 0 || v2.z == 0)
 		exit(1);
 	v.x = v1.x / v2.x;
@@ -30,7 +32,7 @@ t_vec	vec_div(t_vec v1, t_vec v2)
 	return (v);
 }
 
-double vec_dot(t_vec v1, t_vec v2)
+double	dot(t_vec v1, t_vec v2)
 {
 	double	v;
 
@@ -38,7 +40,7 @@ double vec_dot(t_vec v1, t_vec v2)
 	return (v);
 }
 
-t_vec	vec_cross(t_vec v1, t_vec v2)
+t_vec	cross(t_vec v1, t_vec v2)
 {
 	t_vec	v;
 
@@ -47,4 +49,3 @@ t_vec	vec_cross(t_vec v1, t_vec v2)
 	v.z = v1.x * v2.y - v1.y * v2.x;
 	return (v);
 }
-
