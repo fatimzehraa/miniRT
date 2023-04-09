@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   str.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/09 21:47:14 by fael-bou          #+#    #+#             */
+/*   Updated: 2023/04/09 21:55:04 by fael-bou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include<stddef.h>
 #include <stdio.h>
 
@@ -34,12 +46,28 @@ int	skip(char **p)
 int	print_err(int res, int fd, char *line)
 {
 	if (res == 0)
-		return (printf("miniRT: failed to parse line or allocate memory `%s`\n", line), close(fd), 0);
+	{
+		printf("miniRT: failed to parse line or allocate memory `%s`\n", line);
+		close(fd);
+		return (0);
+	}
 	if (res == -1)
-		return (printf("miniRT: failed to parse line `%s` \n", line), close(fd), 0);
+	{
+		printf("miniRT: failed to parse line `%s` \n", line);
+		close(fd);
+		return (0);
+	}
 	if (res == -2)
-		return (printf("miniRT: duplicated element `%s` \n", line), close(fd), 0);
+	{
+		printf("miniRT: duplicated element `%s` \n", line);
+		close(fd);
+		return (0);
+	}
 	if (res == -3)
-		return (printf("miniRT: extra chars at end of line `%s` \n", line), close(fd), 0);
+	{
+		printf("miniRT: extra chars at end of line `%s` \n", line);
+		close(fd);
+		return (0);
+	}
 	return (1);
 }

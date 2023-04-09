@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/09 20:55:34 by fael-bou          #+#    #+#             */
+/*   Updated: 2023/04/09 20:57:32 by fael-bou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "camera.h"
 #include "light.h"
 #include "shape.h"
@@ -17,15 +29,13 @@ t_vec	calc_diff(t_ray *lray, t_light *light, t_ray *ray, t_vec normal)
 	eyev = muln(ray->dir, -1);
 	reflectv = reflect(muln(lray->dir, -1), normal);
 	dott = dot(reflectv, eyev);
-	specular = vec(0,0,0);
+	specular = vec(0, 0, 0);
 	if (dott > 0.0)
 		specular = muln(muln(light->color, powf(dott, 180)), light->ratio);
 	return (specular);
 }
 
-
-
-t_vec multi_lights(t_light *lights, t_equation e_min, t_ctx ctx, t_ray *r)
+t_vec	multi_lights(t_light *lights, t_equation e_min, t_ctx ctx, t_ray *r)
 {
 	t_light	*cur;
 	t_vec	color;
@@ -40,8 +50,8 @@ t_vec multi_lights(t_light *lights, t_equation e_min, t_ctx ctx, t_ray *r)
 		if (!intersect_light(e_min.r_light, ctx.s, co))
 		{
 			cur = cur->next;
-			continue;
-		} 
+			continue ;
+		}
 		co = dot(e_min.r_light.dir, e_min.normal);
 		if (co >= 0)
 		{
@@ -50,7 +60,7 @@ t_vec multi_lights(t_light *lights, t_equation e_min, t_ctx ctx, t_ray *r)
 		}
 		cur = cur->next;
 	}
-	return color;
+	return (color);
 }
 
 t_vec	put_color(t_ray r, t_ctx ctx)
@@ -78,8 +88,7 @@ t_vec	put_color(t_ray r, t_ctx ctx)
 	}
 	if (e_min.t == INFINITY)
 		return (vec(0, 0, 0));
-	return multi_lights(ctx.lights, e_min, ctx, &r);
-	return e_min.shape->color;
+	return (multi_lights(ctx.lights, e_min, ctx, &r));
 }
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)

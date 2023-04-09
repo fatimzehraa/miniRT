@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/09 21:48:19 by fael-bou          #+#    #+#             */
+/*   Updated: 2023/04/09 21:50:08 by fael-bou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef VECTOR_H
 # define VECTOR_H
 
@@ -45,6 +57,6 @@ t_vec	cross(t_vec v1, t_vec v2);
 double	magnitude(t_vec v);
 int		cmp(t_vec v1, t_vec v2);
 t_vec	norm(t_vec v1);
-t_vec reflect(t_vec v, t_vec n);
+t_vec	reflect(t_vec v, t_vec n);
 
 #endif

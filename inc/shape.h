@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   shape.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/09 20:48:09 by fael-bou          #+#    #+#             */
+/*   Updated: 2023/04/09 22:32:02 by fael-bou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SHAPE_H
 # define SHAPE_H
 
 # include "vector.h"
 # include "camera.h"
 
-typedef struct s_light t_light;
+typedef struct s_light	t_light;
 typedef struct s_shape
 {
 	t_vec			color;
@@ -13,8 +25,8 @@ typedef struct s_shape
 	double			r;
 	double			height;
 	double			d3;
-	t_vec			(*normal_at)(t_point p, struct s_shape	*s);
-	t_equation		(*intersection)(t_ray r, struct s_shape	*s);
+	t_vec			(*normal_at)();
+	t_equation		(*intersection)();
 	struct s_shape	*next;
 }	t_shape;
 
@@ -34,5 +46,10 @@ t_equation	cylinder_intersection(t_ray r, t_shape *s);
 t_light		*ft_lstlast_light(t_light *lst);
 int			add_back_light(t_light **lst, t_light *new);
 t_shape		*new_sq_cap(t_vec v);
+t_equation	sq_intersection(t_ray r, t_shape *s);
+void		first_sqcap(t_shape *shape, t_shape *def);
+t_shape		*new_cub_cap(t_vec f, t_shape *s, int dir);
+t_vec		get_random_forward(t_vec v);
+t_equation	no_intersection(t_ray r, t_shape *s);
 
 #endif

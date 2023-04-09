@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   camera.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/09 21:47:45 by fael-bou          #+#    #+#             */
+/*   Updated: 2023/04/09 21:51:55 by fael-bou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CAMERA_H
 # define CAMERA_H
 
@@ -13,15 +25,15 @@ typedef struct s_shape	t_shape;
  * angle: zoom out \zoom in
  * */
 
-typedef struct	s_camera
+typedef struct s_camera
 {
 	t_point	o;
 	t_vec	forward;
 	t_vec	right;
 	t_vec	up;
 	double	angle;
-	double		h;
-	double		w;
+	double	h;
+	double	w;
 }				t_camera;
 
 typedef struct s_ray

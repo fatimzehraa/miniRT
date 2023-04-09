@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/09 20:39:45 by fael-bou          #+#    #+#             */
+/*   Updated: 2023/04/09 22:04:36 by fael-bou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fcntl.h>
 #include <math.h>
 #include <stdio.h>
@@ -8,11 +20,11 @@
 #include "get_next_line.h"
 #include "vector.h"
 
-static int	parse_shape(t_ctx *ctx, char *line)
+int	parse_shape(t_ctx *ctx, char *line)
 {
 	t_shape	*shape;
 
-	shape = lst_new();
+	shape = new_sq_cap(vec(0, 0, 0));
 	if (shape == NULL)
 		return (0);
 	if (is_same(&line, "sp "))
@@ -27,12 +39,12 @@ static int	parse_shape(t_ctx *ctx, char *line)
 	}
 	else if (is_same(&line, "pl "))
 	{
-		if(!parse_plane(&line, shape))
+		if (!parse_plane(&line, shape))
 			return (free_shapes(shape), 0);
 	}
 	else if (is_same(&line, "cb "))
 	{
-		if(!parse_cube(&line, shape))
+		if (!parse_cube(&line, shape))
 			return (free_shapes(shape), 0);
 	}
 	else
@@ -42,7 +54,7 @@ static int	parse_shape(t_ctx *ctx, char *line)
 	return (add_back(&ctx->s, shape), 1);
 }
 
-static int	parse_camera(t_ctx *ctx, char *line)
+int	parse_camera(t_ctx *ctx, char *line)
 {
 	t_vec	random;
 
@@ -51,7 +63,7 @@ static int	parse_camera(t_ctx *ctx, char *line)
 		return (-1);
 	skip(&line);
 	if (ctx->cam)
-		return -2;
+		return (-2);
 	ctx->cam = malloc(sizeof(t_camera));
 	if (ctx->cam == NULL)
 		return (0);
@@ -59,7 +71,7 @@ static int	parse_camera(t_ctx *ctx, char *line)
 		return (0);
 	if (!parse_vec(&line, &ctx->cam->forward) || !skip(&line))
 		return (0);
-	if (!parse_float_d(&line, &ctx->cam->angle,0, 180))
+	if (!parse_float_d(&line, &ctx->cam->angle, 0, 180))
 		return (0);
 	ctx->cam->angle = ctx->cam->angle * M_PI / 180;
 	ctx->cam->forward = norm(ctx->cam->forward);
@@ -71,7 +83,7 @@ static int	parse_camera(t_ctx *ctx, char *line)
 	return (1);
 }
 
-static int	parse_light(t_ctx *ctx, char *line)
+int	parse_light(t_ctx *ctx, char *line)
 {
 	t_light	*light;
 
@@ -94,7 +106,7 @@ static int	parse_light(t_ctx *ctx, char *line)
 	return (1);
 }
 
-static int parse_ambient(t_ctx *ctx, char *line)
+int	parse_ambient(t_ctx *ctx, char *line)
 {
 	if (!is_same(&line, "A "))
 		return (-1);
@@ -111,62 +123,4 @@ static int parse_ambient(t_ctx *ctx, char *line)
 	if (skip(&line) && *line != '\0')
 		return (-3);
 	return (1);
-}
-
-/* Enum ?
-* if res == 1   => ok
-* if res == 0   => allocation failed
-* if res == -1  => type didn't match
-* if res == -2  => duplicated
-* **/
-
-int match(t_ctx *ctx, char *line)
-{
-	int res;
-
-	if (line[0] == '\0' || line[0] == '#')
-		return 1;
-	res = parse_shape(ctx, line);
-	if (res != -1)
-		return res;
-	res = parse_camera(ctx, line);
-	if (res != -1)
-		return res;
-	res = parse_light(ctx, line);
-	if (res != -1)
-		return res;
-	res = parse_ambient(ctx, line);
-	return res;
-}
-
-void reset_ctx(t_ctx *ctx)
-{
-	ctx->ambient = NULL;
-	ctx->cam = NULL;
-	ctx->lights = NULL;
-	ctx->s = NULL;
-}
-
-int	parse(char *filename, t_ctx *ctx)
-{
-	int		fd;
-	char	*line;
-	int		res;
-
-	reset_ctx(ctx);
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		return (0);
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (line == NULL)
-			break ;
-		line[ft_strlen(line) - 1] = '\0';
-		res = match(ctx, line);
-		if (!print_err(res, fd, line))
-			return (free(line), free_ctx(ctx), 0);
-		free(line);
-	}
-	return (close(fd), 1);
 }

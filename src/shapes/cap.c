@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cap.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/09 20:37:33 by fael-bou          #+#    #+#             */
+/*   Updated: 2023/04/09 20:38:55 by fael-bou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 #include "shape.h"
 #include "vector.h"
@@ -16,33 +28,26 @@ t_equation	cap_intersection(t_ray r, t_shape *s)
 	r1 = dot(r.o, s->forward);
 	r2 = dot(r.dir, s->forward);
 	r3 = dot(s->origin, s->forward);
+	e.delta = -1;
 	if (fabs(r2) > 0.001)
 	{
 		t = (-r1 + r3) / r2;
 		if (t >= 0.001)
 		{
-			t_point p = get_point(r, t);
-			if (magnitude(sub(p, s->origin)) > s->r)
-			{
-				e.t = t;
-				e.delta = -1;
+			if (magnitude(sub(get_point(r, t), s->origin)) > s->r)
 				return (e);
-			}
 			e.delta = 1;
 			e.t = t;
 			return (e);
 		}
-		e.delta = -1;
-		return (e);
 	}
-	e.delta = -1;
 	return (e);
 }
 
 t_shape	*new_cap(t_shape *cy, int dir)
 {
 	t_shape	*s;
-	t_point p;
+	t_point	p;
 
 	s = lst_new();
 	s->forward = muln(cy->forward, dir);

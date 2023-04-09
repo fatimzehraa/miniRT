@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lists.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/09 21:46:50 by fael-bou          #+#    #+#             */
+/*   Updated: 2023/04/09 21:49:25 by fael-bou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "shape.h"
 #include <stdlib.h>
 #include "minirt.h"
@@ -69,7 +81,7 @@ t_light	*ft_lstlast_light(t_light *lst)
 
 int	add_back_light(t_light **lst, t_light *new)
 {
-	t_light *last;
+	t_light	*last;
 
 	if (new == NULL)
 		return (0);

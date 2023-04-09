@@ -24,6 +24,7 @@ void print_shape(t_shape *shape)
 	print_vec(&shape->color);
 
 	printf("\nr: %f, height: %f\n", shape->r, shape->height);
+	printf("\nr: %p, height: %p\n", shape->intersection, shape->normal_at);
 	printf("\n");
 }	
 

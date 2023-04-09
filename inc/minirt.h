@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minirt.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/09 21:48:01 by fael-bou          #+#    #+#             */
+/*   Updated: 2023/04/09 21:50:53 by fael-bou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINIRT_H
 # define MINIRT_H
 
@@ -37,10 +49,10 @@ void	render_(t_ctx ctx);
 void	print_shape(t_shape *shape);
 void	print_vec(t_vec *vec);
 void	print_ctx(t_ctx ctx);
-void free_shapes(t_shape *s);
-void free_lights(t_light *l);
+void	free_shapes(t_shape *s);
+void	free_lights(t_light *l);
 void	free_ctx(t_ctx *ctx);
-int	key_hook(int keycode, t_ctx *ctx);
-int	quit(t_ctx *ctx);
+int		key_hook(int keycode, t_ctx *ctx);
+int		quit(t_ctx *ctx);
 
 #endif

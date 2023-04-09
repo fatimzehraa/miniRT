@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/09 21:45:05 by fael-bou          #+#    #+#             */
+/*   Updated: 2023/04/09 21:45:38 by fael-bou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
-void free_shapes(t_shape *s)
+void	free_shapes(t_shape *s)
 {
-	t_shape *tmp;
+	t_shape	*tmp;
 
 	while (s)
 	{
@@ -13,9 +25,9 @@ void free_shapes(t_shape *s)
 	s = NULL;
 }
 
-void free_lights(t_light *l)
+void	free_lights(t_light *l)
 {
-	t_light *tmp;
+	t_light	*tmp;
 
 	while (l)
 	{

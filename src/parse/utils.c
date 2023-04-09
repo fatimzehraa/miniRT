@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/09 21:47:06 by fael-bou          #+#    #+#             */
+/*   Updated: 2023/04/09 21:58:54 by fael-bou         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minirt.h"
 
 static double	_parse_float(char **p, int is_int)
@@ -34,7 +46,8 @@ int	parse_float_d(char **p, double *d, double min, double max)
 	if (**p == '\0')
 		return (0);
 	*d = _parse_float(p, 0);
-	if ((**p == ' ' || **p == '\0' || **p == ',') && *d >= min && (min > max || *d <= max))
+	if ((**p == ' ' || **p == '\0' || **p == ',')
+		&& *d >= min && (min > max || *d <= max))
 		return (1);
 	return (0);
 }
