@@ -7,7 +7,6 @@
 #include<stdio.h>
 #include <math.h>
 
-//<<<<<<< Updated upstream
 t_vec	calc_diff(t_ray *lray, t_light *light, t_ray *ray, t_vec normal)
 {
 	double	dott;
@@ -43,29 +42,15 @@ t_vec multi_lights(t_light *lights, t_equation e_min, t_ctx ctx, t_ray *r)
 			cur = cur->next;
 			continue;
 		} 
-		co = dot(e_min.r_light.dir, e_min.shape->normal_at(e_min.p_shape, e_min.shape));
+		co = dot(e_min.r_light.dir, e_min.normal);
 		if (co >= 0)
 		{
 			color = add(color, muln(mul(muln(e_min.shape->color, co), cur->color), cur->ratio));
-			color = add(color, calc_diff(&e_min.r_light, cur, r, e_min.shape->normal_at(e_min.p_shape, e_min.shape)));
+			color = add(color, calc_diff(&e_min.r_light, cur, r, e_min.normal));
 		}
 		cur = cur->next;
 	}
 	return color;
-/* =======
-t_vec multi_lights(t_light *lights)
-{
-	t_light	*cur;
-
-	cur = lights;
-	while (cur)
-	{
-		
-		cur = cur->next;
-	}
-	if (!intersect_light(e_min.r_light, ctx.s))
-		return muln(e_min.shape->color, 0.1);
->>>>>>> Stashed changes */
 }
 
 t_vec	put_color(t_ray r, t_ctx ctx)
@@ -73,10 +58,6 @@ t_vec	put_color(t_ray r, t_ctx ctx)
 	t_equation	e;
 	t_equation	e_min;
 	t_shape		*s;
-/* <<<<<<< Updated upstream
-=======
-	//double		co;
->>>>>>> Stashed changes */
 
 	s = ctx.s;
 	e_min.t = INFINITY;
@@ -87,7 +68,9 @@ t_vec	put_color(t_ray r, t_ctx ctx)
 		if (e.delta >= 0)
 		{
 			e.p_shape = add(muln(r.dir, e.t), r.o);
-//			e.r_light = ray(e.p_shape, ctx.lights->o);
+			e.normal = s->normal_at(e.p_shape, s);
+			if (dot(e.normal, r.dir) > 0)
+				e.normal = muln(e.normal, -1);
 			if (e.t > 0 && e_min.t >= e.t)
 				e_min = e;
 		}
@@ -95,18 +78,8 @@ t_vec	put_color(t_ray r, t_ctx ctx)
 	}
 	if (e_min.t == INFINITY)
 		return (vec(0, 0, 0));
-//<<<<<<< Updated upstream
 	return multi_lights(ctx.lights, e_min, ctx, &r);
-//=======
-	/* co = dot(e_min.r_light.dir, e_min.shape->normal_at(e.p_shape, e_min.shape));
-	if (co < 0)
-		co = 1; */
-		//return (vec(1, 1, 0));
-		//return (muln(e_min.shape->color, 0.1));
-		
-/* 	return (mul(muln(e_min.shape->color, co), ctx.lights->color)); */
 	return e_min.shape->color;
-//>>>>>>> Stashed changes
 }
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
