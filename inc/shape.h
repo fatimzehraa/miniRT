@@ -33,5 +33,6 @@ t_equation	sphere_intersection(t_ray r, t_shape *s);
 t_equation	cylinder_intersection(t_ray r, t_shape *s);
 t_light		*ft_lstlast_light(t_light *lst);
 int			add_back_light(t_light **lst, t_light *new);
+t_shape		*new_sq_cap(t_vec v);
 
 #endif
