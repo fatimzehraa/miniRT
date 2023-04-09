@@ -17,13 +17,14 @@ int	main(int ac, char **av)
 	ctx.s = NULL;
 	ctx.lights = NULL;
 	ctx.cam = NULL;
+	ctx.win = NULL;
+	ctx.mlx = NULL;
 	if (!parse(av[1], &ctx))
 		return (EXIT_FAILURE);
 	if (!ctx.cam || !ctx.ambient)
 	{
 		printf("please add missing elements (camera and ambient light are required)");
-		free_ctx(&ctx);
-		return EXIT_FAILURE;
+		return (free_ctx(&ctx), EXIT_FAILURE);
 	}
 	print_ctx(ctx);
 	ctx.mlx = mlx_init();
