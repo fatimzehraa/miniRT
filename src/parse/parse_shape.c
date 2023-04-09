@@ -1,12 +1,35 @@
 #include "parse.h"
 #include "shape.h"
+#include "vector.h"
+
+int parse_cube(char **line, t_shape *shape)
+{
+	skip(line);
+	if (!parse_vec(line, &shape->origin) || !skip(line))
+		return (0);
+	if (!parse_vec(line, &shape->forward) || !skip(line))
+		return (0);
+	shape->forward = norm(shape->forward);
+	if (!parse_float_d(line, &shape->r, 0, -1) || !skip(line))
+		return (0);
+	if (!parse_float_d(line, &shape->height, 0, -1) || !skip(line))
+		return (0);
+	if (!parse_color(line, &shape->color))
+		return (0);
+
+	// turn to square planes
+	shape->normal_at = sp_normal_at;
+	shape->intersection = sphere_intersection;
+	return (1);
+}
+
 
 int	parse_sphere(char **line, t_shape *shape)
 {
 	skip(line);
 	if (!parse_vec(line, &shape->origin) || !skip(line))
 		return (0);
-	if (!parse_float(line, &shape->r) || !skip(line))
+	if (!parse_float_d(line, &shape->r, 0, -1) || !skip(line))
 		return (0);
 	if (!parse_color(line, &shape->color))
 		return (0);
@@ -23,16 +46,18 @@ int	parse_cy(char **line, t_shape *shape)
 	if (!parse_vec(line, &shape->forward) || !skip(line))
 		return (0);
 	shape->forward = norm(shape->forward);
-	if (!parse_float(line, &shape->r) || !skip(line))
+	if (!parse_float_d(line, &shape->r, 0, -1) || !skip(line))
 		return (0);
-	if (!parse_float(line, &shape->height) || !skip(line))
+	if (!parse_float_d(line, &shape->height, 0, -1) || !skip(line))
 		return (0);
 	if (!parse_color(line, &shape->color))
 		return (0);
 	shape->intersection = cylinder_intersection;
 	shape->normal_at = cy_normal_at;
-	add_back(&shape, new_cap(shape, 1));
-	add_back(&shape, new_cap(shape, -1));
+	if (!add_back(&shape, new_cap(shape, 1)))
+		return (0);
+	if (!add_back(&shape, new_cap(shape, -1)))
+		return (0);
 	return (1);
 }
 

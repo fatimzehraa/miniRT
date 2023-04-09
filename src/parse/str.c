@@ -22,6 +22,15 @@ int	is_same(char **line, const char *s2)
 	return (1);
 }
 
+int	skip(char **p)
+{
+	if (**p != ' ')
+		return (0);
+	while (**p == ' ')
+		(*p)++;
+	return (1);
+}
+
 int	print_err(int res, int fd, char *line)
 {
 	if (res == 0)

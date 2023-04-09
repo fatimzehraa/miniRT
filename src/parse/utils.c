@@ -34,7 +34,7 @@ int	parse_float_d(char **p, double *d, double min, double max)
 	if (**p == '\0')
 		return (0);
 	*d = _parse_float(p, 0);
-	if ((**p == ' ' || **p == '\0' || **p == ',') && *d >= min && *d <= max)
+	if ((**p == ' ' || **p == '\0' || **p == ',') && *d >= min && (min > max || *d <= max))
 		return (1);
 	return (0);
 }
@@ -65,15 +65,6 @@ int	parse_vec(char **p, t_vec *v)
 		return (0);
 	if (!parse_float(p, &v->z))
 		return (0);
-	return (1);
-}
-
-int	skip(char **p)
-{
-	if (**p != ' ')
-		return (0);
-	while (**p == ' ')
-		(*p)++;
 	return (1);
 }
 

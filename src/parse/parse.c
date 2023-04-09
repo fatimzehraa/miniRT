@@ -18,24 +18,28 @@ static int	parse_shape(t_ctx *ctx, char *line)
 	if (is_same(&line, "sp "))
 	{
 		if (!parse_sphere(&line, shape))
-			return (free_shapes(shape), -1);
+			return (free_shapes(shape), 0);
 	}
 	else if (is_same(&line, "cy "))
 	{
 		if (!parse_cy(&line, shape))
-			return (free_shapes(shape), -1);
+			return (free_shapes(shape), 0);
 	}
 	else if (is_same(&line, "pl "))
 	{
 		if(!parse_plane(&line, shape))
-			return (free_shapes(shape), -1);
+			return (free_shapes(shape), 0);
+	}
+	else if (is_same(&line, "cb "))
+	{
+		if(!parse_cube(&line, shape))
+			return (free_shapes(shape), 0);
 	}
 	else
 		return (free_shapes(shape), -1);
 	if (skip(&line) && *line != '\0')
 		return (free_shapes(shape), -3);
-	add_back(&ctx->s, shape);
-	return (1);
+	return (add_back(&ctx->s, shape), 1);
 }
 
 static int	parse_camera(t_ctx *ctx, char *line)
