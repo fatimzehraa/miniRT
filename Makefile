@@ -1,11 +1,11 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -Wunused -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -flto -Ofast
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
-	LDFLAGS = -lmlx -lXext -lX11 -lm -lbsd
+	LDFLAGS = -lmlx -lXext -lX11 -lm -lbsd 
 endif
 ifeq ($(UNAME_S),Darwin)
-	LDFLAGS = -lmlx -framework OpenGL -framework AppKit
+	LDFLAGS = -lmlx -framework OpenGL -framework AppKit -flto -Ofast
 endif
 LDFLAGS += -fsanitize=address
 

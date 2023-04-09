@@ -16,11 +16,20 @@ static int	parse_shape(t_ctx *ctx, char *line)
 	if (shape == NULL)
 		return (0);
 	if (is_same(&line, "sp "))
-		parse_sphere(&line, shape);
+	{
+		if (!parse_sphere(&line, shape))
+			return (free(shape), -1);
+	}
 	else if (is_same(&line, "cy "))
-		parse_cy(&line, shape);
+	{
+		if (!parse_cy(&line, shape))
+			return (free(shape), -1);
+	}
 	else if (is_same(&line, "pl "))
-		parse_plane(&line, shape);
+	{
+		if(!parse_plane(&line, shape))
+			return (free(shape), -1);
+	}
 	else
 		return (free(shape), -1);
 	add_back(&ctx->s, shape);

@@ -46,7 +46,7 @@ t_vec multi_lights(t_light *lights, t_equation e_min, t_ctx ctx, t_ray *r)
 		co = dot(e_min.r_light.dir, e_min.shape->normal_at(e_min.p_shape, e_min.shape));
 		if (co >= 0)
 		{
-			color = add(color, mul(muln(e_min.shape->color, co), cur->color));
+			color = add(color, muln(mul(muln(e_min.shape->color, co), cur->color), cur->ratio));
 			color = add(color, calc_diff(&e_min.r_light, cur, r, e_min.shape->normal_at(e_min.p_shape, e_min.shape)));
 		}
 		cur = cur->next;
