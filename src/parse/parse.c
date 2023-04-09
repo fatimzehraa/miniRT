@@ -100,7 +100,7 @@ static int parse_ambient(t_ctx *ctx, char *line)
 	ctx->ambient = malloc(sizeof(t_light));
 	if (ctx->ambient == NULL)
 		return (0);
-	if (!parse_float(&line, &ctx->ambient->ratio) || !skip(&line))
+	if (!parse_float_d(&line, &ctx->ambient->ratio, 0, 1) || !skip(&line))
 		return (0);
 	if (!parse_color(&line, &ctx->ambient->color))
 		return (0);
