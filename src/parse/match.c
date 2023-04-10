@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 22:02:36 by fael-bou          #+#    #+#             */
-/*   Updated: 2023/04/09 22:46:03 by fael-bou         ###   ########.fr       */
+/*   Updated: 2023/04/10 19:44:47 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	parse(char *filename, t_ctx *ctx)
 	reset_ctx(ctx);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		return (0);
+		return (printf("can't open file %s\n", filename), 0);
 	while (1)
 	{
 		line = get_next_line(fd);

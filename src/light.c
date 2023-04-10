@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 21:47:37 by fael-bou          #+#    #+#             */
-/*   Updated: 2023/04/09 23:53:58 by fael-bou         ###   ########.fr       */
+/*   Updated: 2023/04/10 19:54:08 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_light	*new_light(t_point origine, t_vec color)
 	t_light	*light;
 
 	light = (t_light *)malloc(sizeof(t_light));
+	if (!light)
+		return (NULL);
 	light->o = origine;
 	light->color = color;
 	return (light);

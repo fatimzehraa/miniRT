@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:31:31 by fael-bou          #+#    #+#             */
-/*   Updated: 2023/04/10 01:22:41 by fael-bou         ###   ########.fr       */
+/*   Updated: 2023/04/10 16:52:28 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,12 @@
 #include <math.h>
 #include <stdio.h>
 
-t_equation	no_intersection(t_ray r, t_shape *s)
-{
-	t_equation	e;
-
-	(void) r;
-	(void) s;
-	e.delta = -1;
-	return (e);
-}
-
 int	hit_square(t_point hitp, t_shape *s)
 {
-	t_vec	u;
-	t_vec	v;
 	t_vec	om;
 
-	u = muln(s->u, 1);
-	v = muln(s->v, 1);
 	om = sub(hitp, s->origin);
-	return (fabs(dot(om, u)) <= s->r && fabs(dot(om, v)) <= s->r);
+	return (fabs(dot(om, s->u)) <= s->r && fabs(dot(om, s->v)) <= s->r);
 }
 
 t_equation	sq_intersection(t_ray r, t_shape *s)
@@ -90,7 +76,7 @@ t_shape	*new_cub_cap(t_shape *orshape, t_shape *s, int dir, int i)
 	cap->forward = orshape->forward;
 	cap->u = get_random_forward(orshape->forward);
 	cap->v = cross(cap->forward, cap->u);
-	if (i ==  1)
+	if (i == 1)
 	{
 		cap->v = orshape->forward;
 		cap->forward = get_random_forward(orshape->forward);
@@ -107,18 +93,6 @@ t_shape	*new_cub_cap(t_shape *orshape, t_shape *s, int dir, int i)
 	cap->r = s->r;
 	cap->color = s->color;
 	return (cap);
-}
-
-t_vec	get_random_forward(t_vec v)
-{
-	t_vec	f;
-	t_vec	r;
-
-	r = vec(0, 1, 0);
-	if (cmp(v, r))
-		r = vec(0, 0, 1);
-	f = cross(v, r);
-	return (norm(f));
 }
 
 void	first_sqcap(t_shape *shape, t_shape *def)

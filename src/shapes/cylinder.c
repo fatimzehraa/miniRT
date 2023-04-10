@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 21:46:56 by fael-bou          #+#    #+#             */
-/*   Updated: 2023/04/09 21:46:57 by fael-bou         ###   ########.fr       */
+/*   Updated: 2023/04/10 20:34:06 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ t_equation	cylinder_intersection(t_ray r, t_shape *s)
 		e.delta = -1;
 		return (e);
 	}
-	if (e.t1 < e.t2)
-		e.t = e.t1;
-	else
+	if (e.t1 < EPSILON)
 		e.t = e.t2;
+	else
+		e.t = e.t1;
 	if (belong_to_cylinder(get_point(r, e.t), s) == 0)
 		e.delta = -1;
 	return (e);

@@ -1,13 +1,13 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -flto -Ofast
+CFLAGS = -Wall -Wextra -Werror -g #-flto -Ofast
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
 	LDFLAGS = -lmlx -lXext -lX11 -lm -lbsd 
 endif
 ifeq ($(UNAME_S),Darwin)
-	LDFLAGS = -lmlx -framework OpenGL -framework AppKit -flto -Ofast
+	LDFLAGS = -lmlx -framework OpenGL -framework AppKit #-flto -Ofast
 endif
-LDFLAGS += -fsanitize=address
+LDFLAGS +=  -g
 
 BUILD_DIR = build
 INC = -I./inc -I/usr/local/include

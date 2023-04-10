@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 20:37:33 by fael-bou          #+#    #+#             */
-/*   Updated: 2023/04/09 23:51:20 by fael-bou         ###   ########.fr       */
+/*   Updated: 2023/04/10 17:11:01 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ t_equation	cap_intersection(t_ray r, t_shape *s)
 				return (e);
 			e.delta = 1;
 			e.t = t;
-			e.t1 = t;
-			e.t2 = t;
 			return (e);
 		}
 	}

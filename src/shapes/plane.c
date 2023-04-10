@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 21:46:41 by fael-bou          #+#    #+#             */
-/*   Updated: 2023/04/09 21:46:43 by fael-bou         ###   ########.fr       */
+/*   Updated: 2023/04/10 16:52:34 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,16 @@ t_shape	*new_plane(t_point p, t_vec v)
 	s->intersection = plane_intersection;
 	s->normal_at = pl_normal_at;
 	return (s);
+}
+
+t_vec	get_random_forward(t_vec v)
+{
+	t_vec	f;
+	t_vec	r;
+
+	r = vec(0, 1, 0);
+	if (cmp(v, r))
+		r = vec(0, 0, 1);
+	f = cross(v, r);
+	return (norm(f));
 }

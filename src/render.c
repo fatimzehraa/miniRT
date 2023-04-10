@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 20:55:34 by fael-bou          #+#    #+#             */
-/*   Updated: 2023/04/09 23:51:39 by fael-bou         ###   ########.fr       */
+/*   Updated: 2023/04/10 20:19:15 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_vec	put_color(t_ray r, t_ctx ctx)
 			e.normal = s->normal_at(e.p_shape, s);
 			if (dot(e.normal, r.dir) > 0)
 				e.normal = muln(e.normal, -1);
-			if (e.t > 0 && e_min.t >= e.t)
+			if (e.t >= -EPSILON && e_min.t >= e.t)
 				e_min = e;
 		}
 		s = s->next;

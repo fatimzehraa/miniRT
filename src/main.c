@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 21:43:26 by fael-bou          #+#    #+#             */
-/*   Updated: 2023/04/09 22:51:32 by fael-bou         ###   ########.fr       */
+/*   Updated: 2023/04/10 19:42:19 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,27 @@
 #define ERR_MSG "please add missing elements"
 #define ERR_MSG1 "(camera and ambient light are required)"
 
+
+int is_rt_file(char *file)
+{
+	int i;
+
+	i = 0;
+	while (file[i])
+		i++;
+	if (i < 4)
+		return (0);
+	if (file[i - 1] == 't' && file[i - 2] == 'r' && file[i - 3] == '.')
+		return (1);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_ctx	ctx;
 
-	if (ac != 2)
-		return (EXIT_FAILURE);
+	if (ac != 2 || !is_rt_file(av[1]))
+		return (printf("invalid arg\n"), EXIT_FAILURE);
 	ctx.s = NULL;
 	ctx.lights = NULL;
 	ctx.cam = NULL;

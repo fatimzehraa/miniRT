@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 21:46:36 by fael-bou          #+#    #+#             */
-/*   Updated: 2023/04/09 21:46:37 by fael-bou         ###   ########.fr       */
+/*   Updated: 2023/04/10 20:42:44 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 #include "shape.h"
 #include "stdio.h"
 #include "vector.h"
+
+int	min_positive(double a, double b)
+{
+	if (a < 0 && b < 0)
+		return (-1);
+	if (a < 0)
+		return (b);
+	return (a);
+}
 
 t_equation	sphere_intersection(t_ray r, t_shape *s)
 {
@@ -35,10 +44,10 @@ t_equation	sphere_intersection(t_ray r, t_shape *s)
 		eq.delta = -1;
 		return (eq);
 	}
-	if (eq.t1 > EPSILON && eq.t1 < eq.t2)
-		eq.t = eq.t1;
+	if (fabs(eq.t1) < fabs(eq.t2))
+		eq.t = fabs(eq.t1);
 	else
-		eq.t = eq.t2;
+		eq.t = fabs(eq.t2);
 	return (eq);
 }
 

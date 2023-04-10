@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 20:48:09 by fael-bou          #+#    #+#             */
-/*   Updated: 2023/04/10 00:10:19 by fael-bou         ###   ########.fr       */
+/*   Updated: 2023/04/10 16:53:07 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,8 @@ int			add_back_light(t_light **lst, t_light *new);
 t_shape		*new_sq_cap(t_vec v);
 t_equation	sq_intersection(t_ray r, t_shape *s);
 void		first_sqcap(t_shape *shape, t_shape *def);
-t_shape	*new_cub_cap(t_shape *orshape, t_shape *s, int dir, int i);
+t_shape		*new_cub_cap(t_shape *orshape, t_shape *s, int dir, int i);
 t_equation	cap_intersection(t_ray r, t_shape *s);
 t_vec		get_random_forward(t_vec v);
-t_equation	no_intersection(t_ray r, t_shape *s);
 
 #endif
