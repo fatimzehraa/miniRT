@@ -80,7 +80,7 @@ void print_ctx(t_ctx ctx)
 	t_light *l= ctx.lights;
 
 	print_cam(ctx.cam);
-	print_ambient(ctx.ambient);
+	print_ambient(ctx.amb);
 	while (l)
 	{
 		print_light(l);

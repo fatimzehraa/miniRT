@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 21:47:24 by fael-bou          #+#    #+#             */
-/*   Updated: 2023/04/09 21:58:01 by fael-bou         ###   ########.fr       */
+/*   Updated: 2023/04/10 01:10:49 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 int	parse_cube(char **line, t_shape *shape)
 {
 	t_shape	def;
-	t_vec	f;
 
 	skip(line);
 	if (!parse_vec(line, &shape->origin) || !skip(line))
@@ -29,18 +28,16 @@ int	parse_cube(char **line, t_shape *shape)
 	if (!parse_color(line, &shape->color))
 		return (0);
 	first_sqcap(shape, &def);
-	if (!add_back(&shape, new_cub_cap(def.forward, &def, -1)))
+	if (!add_back(&shape, new_cub_cap(shape, &def, 1, 0)))
 		return (0);
-	if (!add_back(&shape, new_cub_cap(def.forward, &def, 1)))
+	if (!add_back(&shape, new_cub_cap(shape, &def, -1, 0)))
 		return (0);
-	f = get_random_forward(def.forward);
-	if (!add_back(&shape, new_cub_cap(f, &def, 1)))
+	if (!add_back(&shape, new_cub_cap(shape, &def, 1, 1)))
 		return (0);
-	if (!add_back(&shape, new_cub_cap(f, &def, -1)))
+	if (!add_back(&shape, new_cub_cap(shape, &def, -1, 1)))
 		return (0);
-	f = cross(def.forward, f);
-	return (add_back(&shape, new_cub_cap(f, &def, 1))
-		&& add_back(&shape, new_cub_cap(f, &def, -1)));
+	return (add_back(&shape, new_cub_cap(shape, &def, 1, 2))
+		&& add_back(&shape, new_cub_cap(shape, &def, -1, 2)));
 }
 
 int	parse_sphere(char **line, t_shape *shape)

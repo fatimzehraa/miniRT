@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 22:02:36 by fael-bou          #+#    #+#             */
-/*   Updated: 2023/04/09 22:02:40 by fael-bou         ###   ########.fr       */
+/*   Updated: 2023/04/09 22:46:03 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	match(t_ctx *ctx, char *line)
 
 void	reset_ctx(t_ctx *ctx)
 {
-	ctx->ambient = NULL;
+	ctx->amb = NULL;
 	ctx->cam = NULL;
 	ctx->lights = NULL;
 	ctx->s = NULL;

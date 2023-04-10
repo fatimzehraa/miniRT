@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 21:43:26 by fael-bou          #+#    #+#             */
-/*   Updated: 2023/04/09 21:44:51 by fael-bou         ###   ########.fr       */
+/*   Updated: 2023/04/09 22:51:32 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 #include <math.h>
 #include "parse.h"
 #include <stdio.h>
+
+#define ERR_MSG "please add missing elements"
+#define ERR_MSG1 "(camera and ambient light are required)"
 
 int	main(int ac, char **av)
 {
@@ -32,9 +35,9 @@ int	main(int ac, char **av)
 	ctx.mlx = NULL;
 	if (!parse(av[1], &ctx))
 		return (EXIT_FAILURE);
-	if (!ctx.cam || !ctx.ambient)
+	if (!ctx.cam || !ctx.amb)
 	{
-		printf("please add missing elements (camera and ambient light are required)");
+		printf(ERR_MSG ERR_MSG1);
 		return (free_ctx(&ctx), EXIT_FAILURE);
 	}
 	print_ctx(ctx);

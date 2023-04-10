@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 20:55:34 by fael-bou          #+#    #+#             */
-/*   Updated: 2023/04/09 20:57:32 by fael-bou         ###   ########.fr       */
+/*   Updated: 2023/04/09 23:51:39 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_vec	multi_lights(t_light *lights, t_equation e_min, t_ctx ctx, t_ray *r)
 	double	co;
 
 	cur = lights;
-	color = muln(mul(e_min.shape->color, ctx.ambient->color), ctx.ambient->ratio);
+	color = muln(mul(e_min.shape->color, ctx.amb->color), ctx.amb->ratio);
 	while (cur)
 	{
 		e_min.r_light = ray(e_min.p_shape, cur->o);
@@ -55,7 +55,8 @@ t_vec	multi_lights(t_light *lights, t_equation e_min, t_ctx ctx, t_ray *r)
 		co = dot(e_min.r_light.dir, e_min.normal);
 		if (co >= 0)
 		{
-			color = add(color, muln(mul(muln(e_min.shape->color, co), cur->color), cur->ratio));
+			color = add(color, muln(mul(muln(e_min.shape->color,
+								co), cur->color), cur->ratio));
 			color = add(color, calc_diff(&e_min.r_light, cur, r, e_min.normal));
 		}
 		cur = cur->next;
@@ -120,8 +121,6 @@ void	render_(t_ctx ctx)
 			r.dir = norm(add(ctx.cam->forward, add(muln(ctx.cam->up, ctx.p.y),
 							muln(ctx.cam->right, ctx.p.x))));
 			clr = put_color(r, ctx);
-			if (ctx.x == 0 && ctx.y == 0)
-				print_vec(&r.dir);
 			my_mlx_pixel_put(&data, ctx.x, ctx.y, rgb(clr.x, clr.y, clr.z));
 			ctx.x++;
 		}

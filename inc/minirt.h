@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 21:48:01 by fael-bou          #+#    #+#             */
-/*   Updated: 2023/04/09 21:50:53 by fael-bou         ###   ########.fr       */
+/*   Updated: 2023/04/09 22:46:02 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_ctx
 	t_shape		*s;
 	t_camera	*cam;
 	t_light		*lights;
-	t_light		*ambient;
+	t_light		*amb;
 	int			x;
 	int			y;
 	t_point		p;

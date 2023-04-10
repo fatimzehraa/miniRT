@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 20:39:45 by fael-bou          #+#    #+#             */
-/*   Updated: 2023/04/09 22:04:36 by fael-bou         ###   ########.fr       */
+/*   Updated: 2023/04/09 22:45:59 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,32 +23,23 @@
 int	parse_shape(t_ctx *ctx, char *line)
 {
 	t_shape	*shape;
+	int		ret;
 
 	shape = new_sq_cap(vec(0, 0, 0));
 	if (shape == NULL)
 		return (0);
 	if (is_same(&line, "sp "))
-	{
-		if (!parse_sphere(&line, shape))
-			return (free_shapes(shape), 0);
-	}
+		ret = parse_sphere(&line, shape);
 	else if (is_same(&line, "cy "))
-	{
-		if (!parse_cy(&line, shape))
-			return (free_shapes(shape), 0);
-	}
+		ret = parse_cy(&line, shape);
 	else if (is_same(&line, "pl "))
-	{
-		if (!parse_plane(&line, shape))
-			return (free_shapes(shape), 0);
-	}
+		ret = parse_plane(&line, shape);
 	else if (is_same(&line, "cb "))
-	{
-		if (!parse_cube(&line, shape))
-			return (free_shapes(shape), 0);
-	}
+		ret = parse_cube(&line, shape);
 	else
 		return (free_shapes(shape), -1);
+	if (ret == 0)
+		return (free_shapes(shape), 0);
 	if (skip(&line) && *line != '\0')
 		return (free_shapes(shape), -3);
 	return (add_back(&ctx->s, shape), 1);
@@ -111,14 +102,14 @@ int	parse_ambient(t_ctx *ctx, char *line)
 	if (!is_same(&line, "A "))
 		return (-1);
 	skip(&line);
-	if (ctx->ambient)
+	if (ctx->amb)
 		return (-2);
-	ctx->ambient = malloc(sizeof(t_light));
-	if (ctx->ambient == NULL)
+	ctx->amb = malloc(sizeof(t_light));
+	if (ctx->amb == NULL)
 		return (0);
-	if (!parse_float_d(&line, &ctx->ambient->ratio, 0, 1) || !skip(&line))
+	if (!parse_float_d(&line, &ctx->amb->ratio, 0, 1) || !skip(&line))
 		return (0);
-	if (!parse_color(&line, &ctx->ambient->color))
+	if (!parse_color(&line, &ctx->amb->color))
 		return (0);
 	if (skip(&line) && *line != '\0')
 		return (-3);

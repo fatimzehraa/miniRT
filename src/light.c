@@ -6,7 +6,7 @@
 /*   By: fael-bou <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 21:47:37 by fael-bou          #+#    #+#             */
-/*   Updated: 2023/04/09 21:47:39 by fael-bou         ###   ########.fr       */
+/*   Updated: 2023/04/09 23:53:58 by fael-bou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	intersect_light(t_ray ray, t_shape *shape, double distance)
 		e = shape->intersection(ray, shape);
 		if (e.delta > EPSILON)
 		{
-			if ((e.t1 > EPSILON || e.t2 > EPSILON) && distance > e.t)
+			if ((e.t > EPSILON) && distance > e.t)
 				return (0);
 		}
 		shape = shape->next;
